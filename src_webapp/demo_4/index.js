@@ -7,6 +7,8 @@
       me._bind();
 
       me._init();
+
+      console.log(1);
     },
     _bind: function() {
       var me = this;

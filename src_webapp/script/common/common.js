@@ -52,7 +52,7 @@ var FN = {
     }
   },
   //-------------------------------------------------时间戳转日期
-  formatterDateDay: function(date, flag) {
+  f_miao_str: function(date, flag) {
     var me = this;
     if (!date) {;
       return false;
@@ -66,6 +66,14 @@ var FN = {
       }
     }
   },
+  //日期转时间戳
+  f_str_miao: function(str) {
+    var me = this;
+    var ser = new Date(str);
+    var miao = Date.parse(ser);
+    return miao;
+  },
+
   checkNum: function(num) {
     if (num < 10) {
       return "0" + num;
@@ -317,9 +325,9 @@ var FN = {
         var content = "";
         // var content = "appid=11111&sign=222222222";
         for (var key in obj.data) {
-          content +=key+'='+obj.data[key]+'&';
+          content += key + '=' + obj.data[key] + '&';
         }
-        content = content.slice(0,content.length-1);
+        content = content.slice(0, content.length - 1);
         xhr.send(content);
       }
       // 没有参数
@@ -327,7 +335,7 @@ var FN = {
         xhr.send();
       }
 
-      
+
       var timer = null;
       // 自己写的函数
       xhr.done = function(cb) {
@@ -339,7 +347,7 @@ var FN = {
           }
           // 没有拿到数据
           else {
-            
+
           }
         }, 1);
       };

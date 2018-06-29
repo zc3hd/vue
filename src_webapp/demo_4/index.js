@@ -21,20 +21,101 @@
         _demo: function() {
           // 全局组件
           var new_span = Vue.extend({
-            template:`<span>{{msg}}</span>`,
-            data:function () {
+            template: `#cp_1`,
+            data: function() {
               return {
-                msg:'new_span_msg'
+                msg: 'jubu component:new_span_msg--',
               }
+            },
+            methods: {
+              ck: function() {
+                var me = this;
+                console.log(me.msg);
+              },
             },
           });
 
-          Vue.component('new_span',new_span);
+          // 全局注册方式
+          // Vue.component('new_span',new_span);
 
           // 第二种方式
           // Vue.component('new_span', {
           //   template: `<span>new 组件</span>`
           // });
+
+
+          var cp_span_1 = Vue.extend({
+            template: `<span class='info'>{{msg}}</span>`,
+            data: function() {
+              return {
+                msg: 'span_1',
+              }
+            },
+          });
+          var cp_span_2 = Vue.extend({
+            template: `<span class='info'>{{msg}}</span>`,
+            data: function() {
+              return {
+                msg: 'span_2',
+              }
+            },
+          });
+          var cp_span_3 = Vue.extend({
+            template: `<span class='info'>{{msg}}</span>`,
+            data: function() {
+              return {
+                msg: 'span_3',
+              }
+            },
+          });
+
+
+
+          // 用于传数据的子组件
+          var cp_son = Vue.extend({
+            template: `
+              <span class='info'>{{msg}}</span>
+              </br>
+              <span class='blue'>{{c_data}}</span>
+              </br>
+              <span class='blue'>{{c_obj.a}}</span>
+            `,
+            data: function() {
+              return {
+                msg: `
+                i am a son component of father,
+                i recive a data from my father:
+                `,
+                // c_data:'aa',
+              }
+            },
+            created: function() {
+              // alert('vm实力创建完成--初始化data methods')
+              console.log("son_1");
+            },
+            // 编译之前 寻找模板 指令 
+            beforeCompile: function() {
+              /* body... */
+              // alert('编译之前 寻找模板 指令')
+              console.log("son_2");
+            },
+            // 编译之后 替换为我们的数据
+            compiled: function() {
+              /* body... */
+              // alert('编译之后 替换为我们的数据')
+              console.log("son_3");
+            },
+            ready:function () {
+             
+              console.log("son_4");
+
+            },
+            // props:['c_data'],
+            props:{
+              c_data:String,
+              c_obj:Object,
+            },
+          });
 
 
 
@@ -50,6 +131,15 @@
               // ===================
               box_2_level: 0,
               box_2_class: '',
+
+              // ===================
+              table_name:'span_1',
+
+              // ===================
+              c_data:'i am a data of father',
+              c_obj:{
+                a:1
+              },
             },
 
             // 方法
@@ -117,6 +207,19 @@
                 // }, 1100);
               },
             },
+
+            // 局部组件
+            components: {
+              new_span: new_span,
+
+              // ======================
+              span_1: cp_span_1,
+              span_2: cp_span_2,
+              span_3: cp_span_3,
+
+              // ======================
+              span_son: cp_son,
+            },
             // transitions: {
             //   bounce: {
             //     enterClass: 'zoomInLeft',
@@ -129,6 +232,7 @@
             created: function() {
               // alert('vm实力创建完成--初始化data methods')
               console.log(1);
+
             },
             // 编译之前 寻找模板 指令 
             beforeCompile: function() {
@@ -146,8 +250,7 @@
             ready: function() {
               // alert('真实的把数据插入DOM节点中')
               console.log(4);
-              var me = this;
-              // me.animate();
+              
             },
 
             // 销毁之前
@@ -159,6 +262,9 @@
               /* body... */
             },
           });
+           
+
+
 
 
 

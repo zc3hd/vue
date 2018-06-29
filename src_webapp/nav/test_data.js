@@ -4,6 +4,12 @@
 var nav_fuwu_data = [
   //
   {
+    name: '0.plan',
+    url: '../abc/index.html',
+    img: './img/7.png'
+  },
+  //
+  {
     name: '1.增删改查',
     url: '../demo_1/index.html',
     img: './img/7.png'
@@ -31,5 +37,5 @@ var nav_fuwu_data = [
     name: '用户管理列表',
     img: './img/7.png',
     url: '../module_v2/conf/user/index.html'
-  }, 
+  },
 ];

@@ -151,9 +151,6 @@ animate: function() {
 4.这样无论是让元素怎么变化，都会哪怕是分等级变化，都是可以的。  
 ```
 
-
-
-
 # 组件
 
 ### 1.什么是组件 component;
@@ -162,7 +159,7 @@ animate: function() {
 简单来说，写的这个vm实例，绑定$mount在#app上，整体上有DOM树和自己的数据以及逻辑，这个整体就是组件。
 ```
 
-### 2.使用component
+### 2.生成使用component
 
 * 注册组件的自己的数据的返回
 ```
@@ -192,17 +189,11 @@ HTML:
 <new_span></new_span>
 ```
 
-* 局部组件使用
+* 局部组件
 ```
 new Vew({
   components: {
     new_span: new_span,
-    
-    [span_1  组件的在变量内或者DOM内的直接使用名]：
-    【cp_span_1 在JS内部的变量名】
-    span_1: cp_span_1,
-    span_2: cp_span_2,
-    span_3: cp_span_3,
   },
 });
 ```
@@ -229,81 +220,14 @@ var new_span = Vue.extend({
   });
 ```
 
-* 3.其实哪种写法对我来说是一样的。我更愿意第一种写法。
+* 3.其实哪种写法对我来说是一样的。我好像更愿意第一种写法。
 
 
 ### 4.组件选项卡
 
 
-```
-// 数据
-data: {
-  // ===================
-  table_name:'span_1',
-},
-// 局部组件
-components: {
-  // ======================
-  span_1: cp_span_1,
-  span_2: cp_span_2,
-  span_3: cp_span_3,
-},
-[span_1  组件的在变量内或者模板内的直接使用名]：
-【cp_span_1 在JS内部的变量名】
-
-<div class="item">
-   <span class="blue" @click='table_name="span_1"'>cp-1</span>
-   <span class="blue" @click='table_name="span_2"'>cp-2</span>
-   <span class="blue" @click='table_name="span_3"'>cp-3</span>
-</div>
-<div class="item">
-   <component :is='table_name'></component>
-</div>
-```
 
 
-### 5.父组件 传数据 子组件
-
-* 就是子组件在渲染的时候，把自生绑定的（父级给他绑定的）属性会拿下来，进行接受数据；
-```
-1.定义子组件，挂载到父组件上
-components: {
-  // ======================
-  span_son: cp_son,
-},
-
-2.在父组件中模板中使用子组件
-<div class="item">
-   <span_son></span_son>
-</div>
-3.!!!把子组件当做DOM ，进行属性绑定
-<div class="item">
-   <span_son :c_data = 'c_data' :c_obj = 'c_obj'></span_son>
-</div>
-4.在子组件props中获取绑定属性
-var cp_son = Vue.extend({
-  template: `
-    <span class='info'>{{msg}}{{c_data}}</span>
-    <span class='info'>{{c_obj.a}}</span>
-  `,
-  data: function() {
-    return {
-      msg: `
-      i am a son component of father,
-      i recive a data from my father:
-      `,
-    }
-  },
-  // props:['c_data'],
-  【指定要接受数据的类型】
-  props:{
-    c_data:String,
-    c_obj:Object,
-  },
-});
-```
-
-* 这里开了个小差，我想的是全局挂个对象，在父组件ready的时候，把数据绑到全局上，然后子组件在ready的时候拿到，单项传递是没有问题的。但是父组件变化数据的时候，子组件就不会跟着变化。所以这个方式不行，但是看到了父子组件加载的顺序。
 
 
 
@@ -329,7 +253,3 @@ vm.$mount('#box') ->  手动挂载vue程序
 【用在:一个页面中，出现一个新的html,比如我经常使用的layer,给新的layer一个自己的vm_layer实例】
 ```
 * 现在的角度：就是新出现的DOM树应该是一个新的组件，至于怎么接收数据和调用它的方法还是个问题。
-
-### 4.解决问题3
-
-* 父cp 给 子cp传数据解决了。尝试进行优化这个问题的demo;

@@ -52,7 +52,7 @@ var FN = {
     }
   },
   //-------------------------------------------------时间戳转日期
-  formatterDateDay: function(date, flag) {
+  f_miao_str: function(date, flag) {
     var me = this;
     if (!date) {;
       return false;
@@ -66,35 +66,14 @@ var FN = {
       }
     }
   },
-  //时间格式转换
-  longToDate: function (lmsd) {
-      if (lmsd != null && lmsd != '') {
-          var date = new Date();
-          date.setTime(lmsd);
-          var day = date.getDate().toString();
-          day = day.length == 1 ? '0' + day : day;
-          var month = (date.getMonth() + 1).toString();
-          month = month.length == 1 ? '0' + month : month;
-          var year = date.getFullYear();
-          var hour = date.getHours().toString();
-          hour = hour.length == 1 ? '0' + hour : hour;
-          var min = date.getMinutes().toString();
-          min = min.length == 1 ? '0' + min : min;
-          var second = date.getSeconds().toString();
-          second = second.length == 1 ? '0' + second : second;
-          return (year + '-' + month + '-' + day + ' ' + hour + ':' + min + ':' + second);
-      } else {
-          return ('无');
-      }
+  //日期转时间戳
+  f_str_miao: function(str) {
+    var me = this;
+    var ser = new Date(str);
+    var miao = Date.parse(ser);
+    return miao;
   },
-  dataToLong: function (str) {
-      if (str != '' && str != '无') {
-          str = str.replace(/-/g, '/'); // 将-替换成/
-          var date = new Date(str); // 构造一个日期型数据，值为传入的字符串
-          var time = date.getTime();
-          return time;
-      }
-  },
+
   checkNum: function(num) {
     if (num < 10) {
       return "0" + num;
@@ -316,7 +295,6 @@ var FN = {
 
     // ----同源请求
     // ----同源请求
-
     if (!conf.cors_key) {
       // 默认全部是POST请求
       var opts = {
@@ -347,9 +325,9 @@ var FN = {
         var content = "";
         // var content = "appid=11111&sign=222222222";
         for (var key in obj.data) {
-          content +=key+'='+obj.data[key]+'&';
+          content += key + '=' + obj.data[key] + '&';
         }
-        content = content.slice(0,content.length-1);
+        content = content.slice(0, content.length - 1);
         xhr.send(content);
       }
       // 没有参数
@@ -357,7 +335,7 @@ var FN = {
         xhr.send();
       }
 
-      
+
       var timer = null;
       // 自己写的函数
       xhr.done = function(cb) {
@@ -369,7 +347,7 @@ var FN = {
           }
           // 没有拿到数据
           else {
-            
+
           }
         }, 1);
       };
@@ -423,7 +401,7 @@ var FN = {
       return $(sel).css('height').replace('px', '') * 1;
     }
   },
-    // 视图宽度
+  // 视图宽度
   dom_width: function(sel) {
     // 不存在该dom
     if ($(sel).length == 0) {

@@ -15,4 +15,10 @@ var plans_data = [
     date: '2018-06-29',
     info:'vucabulary',
   },
+  // 
+  {
+    name: "vue:传数据",
+    date: '2018-07-03',
+    info:'父子组件传数据',
+  },
 ];

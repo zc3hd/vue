@@ -70,9 +70,9 @@
           });
 
 
-
+          // ================================================
           // 用于传数据的子组件
-          var cp_son = Vue.extend({
+          var cp_send_to_son = Vue.extend({
             template: `
               <span class='info'>{{msg}}</span>
               </br>
@@ -105,15 +105,41 @@
               // alert('编译之后 替换为我们的数据')
               console.log("son_3");
             },
-            ready:function () {
-             
+            ready: function() {
+
               console.log("son_4");
 
             },
             // props:['c_data'],
-            props:{
-              c_data:String,
-              c_obj:Object,
+            props: {
+              c_data: String,
+              c_obj: Object,
+            },
+          });
+
+          // ================================================
+          // 用于传数据的子组件
+          var cp_send_to_f = Vue.extend({
+            template: `
+              <span class='info' @click='send_to_f'>{{msg}}</span>
+            `,
+            data: function() {
+              return {
+                msg: `i am a son data`,
+              }
+            },
+            methods: {
+              send_to_f: function() {
+                var me = this;
+                me.$emit('ev_send_to_f', me.msg);
+              },
+            },
+            ready: function() {
+              var me = this;
+              setTimeout(function() {
+                me.$emit('ev_send_to_f', "xxxxxxxxxxxxxxx-ready");
+              }, 1000);
+
             },
           });
 
@@ -133,13 +159,19 @@
               box_2_class: '',
 
               // ===================
-              table_name:'span_1',
+              table_name: 'span_1',
 
               // ===================
-              c_data:'i am a data of father',
-              c_obj:{
-                a:1
+              // 用于父传子的数据
+              c_data: 'i am a data of father',
+              c_obj: {
+                a: 1
               },
+
+
+              // =====================
+              // 用于接收的数据
+              f_son_msg: '--'
             },
 
             // 方法
@@ -206,6 +238,12 @@
                 //   me.box_2_class = '';
                 // }, 1100);
               },
+
+              // 从子组件接收数据
+              get_from_s: function(msg) {
+                var me = this;
+                me.f_son_msg = msg;
+              },
             },
 
             // 局部组件
@@ -218,8 +256,12 @@
               span_3: cp_span_3,
 
               // ======================
-              span_son: cp_son,
+              cp_send_to_son: cp_send_to_son,
+
+              // ======================
+              cp_send_to_f: cp_send_to_f,
             },
+
             // transitions: {
             //   bounce: {
             //     enterClass: 'zoomInLeft',
@@ -250,7 +292,7 @@
             ready: function() {
               // alert('真实的把数据插入DOM节点中')
               console.log(4);
-              
+
             },
 
             // 销毁之前
@@ -262,7 +304,7 @@
               /* body... */
             },
           });
-           
+
 
 
 

@@ -62,7 +62,21 @@
        <span class="blue" >Object:{{c_obj.a}}</span>
     </div>
     <div class="item">
-       <span_son :c_data = 'c_data' :c_obj = 'c_obj'></span_son>
+       <cp_send_to_son :c_data = 'c_data' :c_obj = 'c_obj'></cp_send_to_son>
+       <!-- <span_son></span_son> -->
+    </div>
+    </br>
+    </br>
+    <!-- =================================================== -->
+    <div class="item title">
+      component 父组件《--收数据《--子组件
+    </div>
+    <div class="item">
+       <span class="info" >in father:</span>
+       <span class="blue" >old msg:{{f_son_msg}}</span>
+    </div>
+    <div class="item">
+       <cp_send_to_f @ev_send_to_f = 'get_from_s'></cp_send_to_f>
        <!-- <span_son></span_son> -->
     </div>
 

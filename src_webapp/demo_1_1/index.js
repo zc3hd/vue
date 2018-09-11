@@ -52,6 +52,7 @@
                 // name_info: '',
               };
             },
+            // 父组件给数据
             props: {
               title: String,
               name_info: String,
@@ -126,13 +127,14 @@
 
               // 弹窗的信息体
               layer_obj: {
+
                 show: false,
-                title: 'add',
-                name_info: 'name_info',
+
+                title: '',
+                name_info: '',
 
                 // 用户ID
                 id: null,
-
 
                 // 删除的显示
                 show_del: false,

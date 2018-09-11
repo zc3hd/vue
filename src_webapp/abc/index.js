@@ -8,13 +8,6 @@
       // 复习总数
       review_sum: 6,
 
-      // 复习模式
-      // review_mode: {
-      //   // 艾宾浩斯(H.Ebbinghaus)
-      //   'Ebbinghaus': 6,
-      // },
-
-
       // 复习的天数间隔
       review_plan: [],
 
@@ -57,15 +50,14 @@
           me._list();
 
 
-
-
-
         },
         // ======================================
         _now: function() {
           var ser = new Date();
           var miao = Date.parse(ser);
           me.conf._str_now = FN.f_miao_str(miao, true);
+
+          // console.log(me.conf._str_now);
         },
 
         // ======================================
@@ -82,12 +74,13 @@
             cursorborder: '1px solid #ccc'
           });
 
-          console.log(me.conf._str_obj);
+          // console.log(me.conf._str_obj);
         },
         _list_one: function(name, arr) {
           var new_arr = $.extend(true, [], me.conf._str_arr);
           var key = null;
 
+          // 其实标题
           var str = `<span class='title'>${name}</span>`;
 
           var now_class = '';
@@ -113,8 +106,9 @@
             }
           });
 
+
           $('#table').append(`
-            <div class="item" style='width:${(me.conf._str_arr.length + 1)*120}px'>
+            <div class="item" style='width:${(new_arr.length+1)*120}px'>
               ${str}
             </div>`);
         },
@@ -149,6 +143,8 @@
                 break;
             }
           }
+
+          // console.log(me.conf.review_plan);
 
 
         },
@@ -238,17 +234,25 @@
 
 
         _title_init: function() {
-          var str = '<span>item</span>';
+          var str = '<span class="date">item</span>';
           var now_class = "";
+
+          // var top_title_w = 1;
           me.conf._str_arr.forEach(function(ele, index) {
+            // 当前时间
             if (ele == me.conf._str_now) {
               now_class = "now";
-            } else {
+              // top_title_w = 2;
+            }
+            // 
+            else {
               now_class = "";
             }
             str += `<span class=${now_class}>${ele}</span>`;
 
           });
+
+
           $('#title')
             .css('width', (me.conf._str_arr.length + 1) * 120 + 'px')
             .html(str);

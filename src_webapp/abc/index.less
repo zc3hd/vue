@@ -80,13 +80,22 @@ body {
         }
         >.now {
           background-color: red;
+          display: block;
         }
+        // 每一项的标题
         >.title {
           background-color: @table_title_bg;
+          display: block;
         }
       }
+      // 整个标题
       >.title {
         background-color: @table_title_bg;
+        >.date{
+          background-color: @table_title_bg;
+          display: block;
+          float: left;
+        }
       }
     }
   }

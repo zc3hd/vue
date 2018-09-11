@@ -10,19 +10,21 @@ body {
   height: 100%;
   font-family: 'Microsoft Yahei';
   border: 0;
-  background-color: rgb(49, 56, 74);
 }
 
-
+[v-cloak]{
+  display: none;
+}
 /* ------------------------------ */
 
 .app {
   width: 100%;
-  height: 100%;
+  height: 50%;
   position: relative;
   box-sizing: border-box;
   background-color: rgb(49, 56, 74);
   padding: 30px;
+  overflow-y: auto;
   // 工具栏
   >.tools {
     position: absolute;
@@ -235,6 +237,24 @@ body {
         cursor: pointer;
       }
     }
+  }
+}
+
+
+.app_2{
+  width: 100%;
+  height: 50%;
+  background-color: blue;
+  >.item{
+    width: 100%;
+    height: 30px;
+    border-bottom: 1px solid #fff;
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    line-height: 30px;
+    box-sizing: border-box;
+    padding-left: 50px;
   }
 }
 

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>vue</title>
+  <link rel="stylesheet" href="../script/lib/layer/skin/layer.css">
+  <link rel="stylesheet" href="../script/lib/Animate_css/animate.css">
+  <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+  <!-- ===============slot================= -->
+  <div class="app">
+    <div class="app_box" id="app">
+      <div class="item title">
+        slot
+      </div>
+      <div class="item">
+        <new_span>
+          <ul slot='f_ul'>
+            <li>{{key}}</li>
+            <li>{{key}}</li>
+            <li>{{key}}</li>
+            <li>{{key}}</li>
+            <li>{{key}}</li>
+            <li>{{key}}</li>
+            <li>{{key}}</li>
+          </ul>
+        </new_span>
+      </div>
+    </div>
+  </div>
+  <template id='cp_1'>
+    <span v-show='key'>{{msg}}
+    </span>
+    <slot name='f_ul'></slot>
+  </template>
+  <!-- ================================ -->
+  <div class="app">
+    <!-- <div class="app_box" id="app_2">
+      <div class="item title">
+        router
+      </div>
+      <ul slot='f_ul'>
+        <li>
+          <a href="#" v-link="{path:'/nav_1'}">nav_1</a>
+        </li>
+        <li>
+          <a href="#" v-link="{path:'/nav_1/a'}">nav_1-a</a>
+        </li>
+        <li>
+          <a href="#" v-link="{path:'/nav_1/b'}">nav_1-b</a>
+        </li>
+        <li>
+        </li>
+        <li>
+          <a href="#" v-link="{path:'/nav_2'}">nav_2</a>
+        </li>
+        <li>
+          <a href="#" v-link="{path:'/nav_2/zhangsan'}">nav_2</a>
+        </li>
+      </ul>
+      <div class="item">
+      </div>
+      <div class="item">
+        <router-view></router-view>
+      </div>
+    </div> -->
+    
+    <div class="app_box" id="app_3">
+      
+    </div>
+  </div>
+</body>
+<!-- JQ -->
+<script src="../script/lib/jquery/jquery.js" type="text/javascript"></script>
+<!-- layer -->
+<script src="../script/lib/layer/layer.js" type="text/javascript"></script>
+<!-- vue -->
+<script src="../script/lib/vue/vue.min.js" type="text/javascript"></script>
+<!-- vue-router -->
+<script src="../script/lib/vue/vue-router/dist/vue-router.js" type="text/javascript"></script>
+<!-- test -->
+<script src="./test_data.js" type="text/javascript"></script>
+<!-- main -->
+<script src="./index.js" type="text/javascript"></script>
+<script type="text/javascript">
+// $(function() {
+//   new Nav().init();
+// });
+</script>
+
+</html>

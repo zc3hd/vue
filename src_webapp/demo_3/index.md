@@ -34,6 +34,8 @@ destroyed:function () {
 
 使用场景：
 ready：真实的把初始化数据插入DOM节点中后可以加载加载自己的函数
+
+
 beforeDestroy：自己写的实时数据，用于停止定时器。
 ```
 
@@ -80,10 +82,10 @@ vm.$el  ->  就是DOM元素
 vm.$data  ->  就是data
 
 vm.$mount('#box') ->  手动挂载vue程序
-【这个就是可以用在一个页面中，出现一个新的html,比如我经常使用的layer,给新的layer一个自己的vm_layer】
+【这个就是可以用在一个页面中，出现一个新的html,比如我经常使用的layer,给新的layer一个自己的vm_layer】,这个好像不行。
 
 vm.$options ->   获取自定义属性
-vm.$destroy() ->   销毁vm自己这个实力
+vm.$destroy() ->   销毁vm自己这个实例
 
 监听数据变化
 vm.$watch(name,fnCb);  //浅度
@@ -146,3 +148,5 @@ Vue.directive('red',function(参数){
 @click='add()';  事件绑定
 v-show = false; 
 ```
+
+* 突然想到，data里的数据都是针对一些DOM的或者公共的数据。

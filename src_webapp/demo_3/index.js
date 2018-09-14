@@ -21,6 +21,10 @@
           Vue.directive("red", function() {
             // console.log(this.el);
             this.el.style.backgroundColor = 'red';
+
+            $(this.el).on('click',function (e) {
+              // console.log(e);
+            });
           });
           var vm = new Vue({
             // 可以为class dom 

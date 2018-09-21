@@ -63,7 +63,7 @@ var plans_data = [
   },
 
 
-    // 
+  // 
   {
     name: "vue-3",
     date: '2018-09-18',
@@ -114,6 +114,62 @@ var plans_data = [
     `,
   },
 
+  // 
+  {
+    name: "vue-4",
+    date: '2018-09-21',
+    info: `
+    ****************************************************
+    DMOE: demo-10 | webpack/demo-11 
+
+    demo-10:
+    1、vue2.0-router的在HTML中使用:
+       视图：
+       <router-link to ='/nav_1'>nav_1</router-link>
+       <router-view></router-view>
+
+       配置：
+       var routes = [
+        {path:"/nav_1",component:"nav_1"},
+       ];
+       var router = new VueRouter({
+        routes:routes
+       });
+
+       开起
+       new vue({
+        el:"#app",
+        router:router
+       })
+       ------------------------------------------------
+       视图也可以放在组件内部，注意根节点
+
+       开启
+       new vue({
+        el:"#app",
+        router:router，
+        render:h=>h(view_cpt);
+       })
+
+    webpack/demo-11：
+    1、vue2.0-router的在webpack中使用:
+      npm install vue-router@2.0.1 --save
+
+      import VueRouter form 'vue-router';
+      vue.use(VueRouter);
+
+      var router = new VueRouter({
+        routes:routes
+      });
+
+      new vue({
+        el:"#app",
+        render:h=>h(App),
+        router,
+      })
+    `,
+  },
+
 
 
 
@@ -131,10 +187,17 @@ var plans_data = [
     info: `
     `,
   },
-
+  // 
   {
     name: "list-1",
     date: '2018-09-12',
+    info: `
+    `,
+  },
+  // 
+  {
+    name: "list-6",
+    date: '2018-09-18',
     info: `
     `,
   },

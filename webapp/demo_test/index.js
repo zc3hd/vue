@@ -1,1 +1,0 @@
-"use strict";function Nav(){}Nav.prototype={init:function(){console.log(1),$("#point_box").css("transform","rotate(1deg)");var t=1,o=setInterval(function(){t+=1,$("#point_box").css("transform","rotate("+t+"deg)"),180==t&&clearInterval(o)},16)}};

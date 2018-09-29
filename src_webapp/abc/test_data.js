@@ -171,6 +171,43 @@ var plans_data = [
   },
 
 
+  // 
+  {
+    name: "vue-5",
+    date: '2018-09-27',
+    info: `
+    ****************************************************
+    DMOE: webpack/demo-12 
+
+    demo-12:
+     1.element-ui 的全局引入和局部引入。
+     2. npm i xxx@0.0.1 -D /-S
+     3. axios ...
+     4. element-ui的组件可以绑定事件，组件写的组件不能绑定，类似一种事件代理：@click.native = 'xxx';
+
+     Z.element-ui 目前在我这没有什么用。
+    `,
+  },
+
+  // 
+  {
+    name: "vue-6",
+    date: '2018-09-29',
+    info: `
+    ****************************************************
+    DMOE: webpack/demo-13 
+
+    demo-13: vuex
+     1.vuex 暂时的数据中心，可以传数据，传方法。
+     2.在index.js里直接写 state 和 mutations就行了。
+     3.在组件内部直接使用 
+        me.$store.state.xxx 进行数据的获取
+        me.$store.commit('ev_1',info||fn) 进行数据或方法的传递传递。
+     4.相比之下，老师教的那个又复杂，又不好维护。
+    `,
+  },
+
+
 
 
 

@@ -151,7 +151,6 @@ var son_cpt = Vue.extend({
 
 ```
 var Ev = new Vue();
-
 var son_1 = {
   data:{
     msg:"xxxx1",

@@ -62,6 +62,7 @@
 
 ```
 冒泡：最外层DOM和下层等DOM都绑定一类型事件，比如click,点最外层DOM，下层等DOM也会触发自己的事件
+冒泡是往屏幕里面冒
 
 原生：
 var event = event || window.event;

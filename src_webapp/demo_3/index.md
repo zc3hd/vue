@@ -87,7 +87,7 @@ vm.$mount('#box') ->  手动挂载vue程序
 vm.$options ->   获取自定义属性
 vm.$destroy() ->   销毁vm自己这个实例
 
-监听数据变化
+监听数据变化只能是监听一个变量
 vm.$watch(name,fnCb);  //浅度
 vm.$watch(name,fnCb,{deep:true});  //深度监视 
 

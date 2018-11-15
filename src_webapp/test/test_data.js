@@ -223,29 +223,7 @@ var plans_data = [
   },
 
 
-  // ======================================En
-  {
-    name: "webpack-1",
-    date: '2018-11-2',
-    info: `
-    
-    demo: demo_webpack_learn
 
-    001：算是对目前开发单个模块（js）的webpack开发打包工具了。
-
-    1.dev模式：入口html 、入口JS、less的配置即可；
-    2.build模式：
-       输出路径、
-
-       输出name、
-       入口js（和异步JS）的输出配置
-       css的输出配置
-
-       html的指定和输出，这个插件可以灵活的处理js和css的路径，但是不能处理css里面的路径
-
-       所以：img、fonts的输出路径是由src里面目录结构决定的，也是决定了css的输出路径
-    `,
-  },
 
 
 

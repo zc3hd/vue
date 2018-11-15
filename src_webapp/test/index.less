@@ -1,0 +1,171 @@
+* {
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-family: 'Microsoft Yahei';
+  border: 0;
+  background-color: rgb(49, 56, 74);
+}
+
+// box
+@table_bg: #123;
+// 标题
+@table_title_bg: green;
+// 单元的设置
+@sp_border_color: rgb(49, 56, 74);
+@sp_font_color: #fff;
+
+/* ------------------------------ */
+
+.app {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(49, 56, 74);
+  box-sizing: border-box;
+  padding: 10px;
+  >.box {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    box-sizing: border-box;
+    padding-top: 35px;
+    // 工具栏
+    >.tool {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 30px;
+      >span {
+        display: block;
+        float: left;
+        height: 100%;
+        line-height: 30px;
+        text-align: center;
+        padding-left: 8px;
+        padding-right: 5px;
+        background-color: green;
+        color: #fff;
+        font-weight: 600;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    }
+    // table
+    >.table {
+      width: 100%;
+      height: 100%;
+      background-color: @table_bg;
+      overflow: hidden;
+      >.item {
+        height: 30px;
+        >span {
+          display: block;
+          float: left;
+          height: 30px;
+          width: 120px;
+          line-height: 30px;
+          text-align: center;
+          color: @sp_font_color;
+          font-weight: 600;
+          box-sizing: border-box;
+          border-right: 3px solid @sp_border_color;
+          border-bottom: 2px solid @sp_border_color;
+        }
+        >.now {
+          background-color: red;
+          display: block;
+        }
+        // 每一项的标题
+        >.title {
+          background-color: @table_title_bg;
+          display: block;
+        }
+      }
+      // 整个标题
+      >.title {
+        background-color: @table_title_bg;
+        >.date{
+          background-color: @table_title_bg;
+          display: block;
+          float: left;
+        }
+      }
+    }
+  }
+  // =================================
+  >.title {
+    font-size: 22px;
+  }
+  >.demo_box {
+    width: 200px;
+    height: 200px;
+    transform: translate(500px, 0);
+    background-color: #ccc;
+  }
+  // ===============================
+  >.demo_box-transition {
+    transition: 1s all ease;
+  }
+  // 进入之前的状态
+  >.demo_box-enter {
+    transform: translate(0, 0);
+    border-radius: 100px;
+    background-color: red;
+  }
+  // 离开之后的状态
+  >.demo_box-leave {
+    transform: translate(800px, 0);
+    border-radius: 100px;
+    background-color: blue;
+  }
+  //=======================================
+  >.demo_animated_box {
+    width: 2px;
+    height: 2px;
+    background-color: red;
+    transition: 1s all ease;
+  }
+  >.demo_animated_box_1 {
+    transform: translate(350px, 0);
+    width: 30px;
+    height: 30px;
+    background-color: #123;
+    border-radius: 15px;
+  }
+  >.demo_animated_box_2 {
+    transform: translate(50%, 0);
+    width: 50%;
+    height: 30px;
+    background-color: #123;
+    border-radius: 15px;
+  }
+  >.demo_animated_box_3 {
+    transform: translate(50%, 0);
+    width: 50%;
+    height: 500px;
+    background-color: #789;
+    border-radius: 15px;
+  }
+  >.demo_animated_box_4 {
+    transform: translate(0, 0);
+    width: 30px;
+    height: 30px;
+    background-color: #123;
+    border-radius: 15px;
+  }
+  >.demo_animated_box_5 {
+    width: 2px;
+    height: 2px;
+    background-color: red;
+  }
+}
+
+
+/* -------------------------------- */

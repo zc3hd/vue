@@ -2,7 +2,7 @@
 
 ### 动画
 
-* 本质还是给DOM做类名绑定，折射出vue的数据基本不是配置就是DOM的属性数据。
+* 本质还是给DOM做类名绑定，折射出vue的数据基本不是配置,就是DOM的属性数据。
 ```
 1.引入
 <link rel="stylesheet" href="../script/lib/Animate_css/animate.css">

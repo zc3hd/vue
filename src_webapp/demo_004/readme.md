@@ -150,7 +150,7 @@ var cp_send_to_f = Vue.extend({
   methods:{
     send_to_f:function () {
       var me = this;
-      定义【发射】
+      定义【发射】事件通道
       me.$emit('ev_send_to_f',me.msg);
     },
   }

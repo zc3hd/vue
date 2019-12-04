@@ -16,144 +16,71 @@ body {
   display: none;
 }
 /* ------------------------------ */
+input {
+  height: 30px;
+  width: 300px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+button {
+  width: 80px;
+  height: 30px;
+  background-color: #fff;
+  // border: none;
+  outline: none;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  cursor: pointer;
+}
+
 
 .app {
-  width: 100%;
-  height: 50%;
+  // width: 50%;
   position: relative;
   box-sizing: border-box;
   background-color: rgb(49, 56, 74);
   padding: 30px;
-  overflow-y: auto;
-  // 工具栏
-  >.tools {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 30px;
-    background-color: #123;
-    box-sizing: border-box;
-    padding-left: 30px;
-    >span {
-      display: block;
-      float: left;
-      height: 90%;
-      padding-left: 5px;
-      padding-right: 5px;
-      text-align: center;
+  overflow: auto;
+  // 测试的一项
+  >.box {
+    margin: 0 10px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    background-color: #ccc;
+    padding: 8px 20px;
+    >.item {
+      font-size: 20px;
       line-height: 30px;
-      background-color: green;
-      color: #fff;
       font-weight: 600;
-      margin-right: 3px;
-      margin-top: 2px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-  }
-  /*  normal一项  */
-  >.item {
-    width: 100%;
-    height: 26px;
-    line-height: 26px;
-    text-align: center;
-    font-weight: 600;
-    color: #fff;
-    font-size: 20px;
-    >input {
-      height: 95%;
-      border: none;
-      outline: none;
-      font-weight: 800;
-      font-size: 30px;
-    }
-  }
-  // 数据列表
-  >.arr_box {
-    width: 100%;
-    height: 300px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    padding-left: 10px;
-    padding-right: 10px;
-    >.main_box {
-      width: 100%;
-      height: 100%;
-      overflow-y: auto;
-      >.arr_item {
-        width: 100%;
-        height: 26px;
-        line-height: 26px;
-        text-align: center;
-        font-weight: 600;
-        color: #fff;
-        font-size: 20px;
-        box-sizing: border-box;
-        padding-left: 10px;
-        padding-right: 20px;
-        background-color: rgba(0, 0, 0, 0.6);
-        margin-bottom: 2px;
-        >span {
-          display: block;
-          margin-top: 3px;
-          height: 20px;
-          padding-left: 5px;
-          padding-right: 5px;
-          margin-right: 3px;
-          border-radius: 5px;
-          cursor: pointer;
-          text-align: center;
-          line-height: 20px;
-          font-weight: 600;
-          font-size: 10px;
-          background-color: green;
-          color: #fff;
-        }
-        >.info {
-          float: left;
-        }
-        >.tool {
-          float: right;
-          background-color: blue;
-          padding-left: 10px;
-          padding-right: 10px;
-          margin-right: 5px;
-        }
-      }
-    }
-    // 没有数据的时候
-    >.no_list{
-      width: 100%;
-      height: 100%;
-      line-height: 300px;
-      text-align: center;
-      font-weight: 600;
-      color: #fff;
-      font-size: 30px;
     }
   }
   // 弹窗
   >.layer {
     width: 100%;
     height: 100%;
-    position: absolute;
+    position: fixed;
     z-index: 1;
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.6);
     >.layer_box {
       width: 400px;
-      height: 100px;
+      height: 30px;
+      box-sizing: border-box;
       position: absolute;
       top: 50%;
       left: 50%;
       border: 2px solid yellow;
       transform: translate(-50%, -50%);
+      // 按钮
       >.close {
         position: absolute;
-        top: -32px;
-        right: -2px;
+        top: -2px;
+        right: -0px;
+        transform: translateX(100%);
         width: 30px;
         height: 30px;
         background-color: yellow;
@@ -165,69 +92,19 @@ body {
       >.main {
         width: 100%;
         height: 100%;
-        >.layer_core {
+        background-color: #234;
+        >input {
           width: 100%;
           height: 100%;
-          font-size: 12px;
-          color: #ccc;
-          background-color: #234;
-          position: relative;
           box-sizing: border-box;
-          padding-top: 40px;
-          >.title {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 36px;
-            line-height: 36px;
-            background-color: #123;
-            font-size: 14px;
-            box-sizing: border-box;
-            padding-left: 20px;
-          }
-          >.box {
-            width: 100%;
-            height: 100%;
-            // 添加
-            >.add_item {
-              width: 100%;
-              height: 30px;
-              line-height: 30px;
-              >div {
-                height: 100%;
-                float: left;
-              }
-              >.title {
-                width: 30%;
-                text-align: right;
-              }
-              >.info {
-                width: 70%;
-                >input {
-                  width: 75%;
-                  height: 70%;
-                  border: none;
-                  margin-left: 30px;
-                }
-              }
-            }
-            // del
-            >.del_item {
-              width: 100%;
-              height: 30px;
-              line-height: 30px;
-              text-align: center;
-              font-size: 26px;
-              font-weight: 600;
-            }
-          }
+          padding-left: 20px;
         }
       }
       >.yes {
         position: absolute;
-        bottom: -2px;
-        right: -2px;
+        top: 0px;
+        right: -0px;
+        transform: translate(100%,100%);
         width: 60px;
         height: 30px;
         background-color: yellow;
@@ -240,23 +117,3 @@ body {
   }
 }
 
-
-.app_2{
-  width: 100%;
-  height: 50%;
-  background-color: blue;
-  >.item{
-    width: 100%;
-    height: 30px;
-    border-bottom: 1px solid #fff;
-    font-size: 18px;
-    font-weight: 600;
-    color: #fff;
-    line-height: 30px;
-    box-sizing: border-box;
-    padding-left: 50px;
-  }
-}
-
-
-/* -------------------------------- */

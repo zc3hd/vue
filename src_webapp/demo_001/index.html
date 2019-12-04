@@ -4,114 +4,104 @@
 <head>
   <meta charset="UTF-8">
   <title>vue-简单的增删改查</title>
-  <link rel="stylesheet" href="../script/lib/layer/skin/layer.css">
   <link rel="stylesheet" href="./index.css">
 
 </head>
 
 <body>
-  <div class="app" id="app">
+  <div class="app" id="app" v-cloak>
+
+
+    <!-- -------------------------------v-model -->
+    <div class="box">
+      <h1>v-model</h1>
+      <div class="item">
+        输入：<input type="text" v-model="obj.a">
+      </div>
+      <div class="item">
+        显示：{{obj.a=="admin"}}
+      </div>
+      <div class="item">
+        一次绑定：{{*obj.a}}
+      </div>
+      <div class="item">
+        识别HTML：{{{obj.a}}}
+      </div>
+
+    </div>
+
+    <!-- --------------------------------------------v-for -->
+    <div class="box">
+      <h1>v-for</h1>
+
+      <h3>对象的遍历:</h3>
+      <div class="item" v-for='(k,v) in obj'>
+        obj[ {{k}} ]:{{v}}
+      </div>
+
+      <h3>数组的遍历:</h3>
+      <div class="item" v-for='ele in arr' track-by='$index'>
+        index：{{$index}} ; ele：{{ele}}
+      </div>
+    </div>
+
+
+    <!-- ---------------------------------------------v-show -->
+    <div class="box">
+      <h1>v-show</h1>
+      <div class="item">
+        <button v-on:click="key = !key">btn</button>
+      </div>
+      <div class="item">
+        <button v-on:click="btn_ck()">btn</button>
+      </div>
+
+      <div class="item" v-show=key>
+        显示的信息
+      </div>
+    </div>
+
+
+    <!-- -----------------------------------------------案例 -->
+
+    <div class="box">
+      <h1>Todolist</h1>
+      <div class="item">
+        <button v-on:click="_layer_show()">add</button>
+      </div>
+      <div class="item" v-for="ele in list" v-show="list.length!=0">
+        {{$index+1}} {{ele.info}} <button v-on:click="_layer_upd(ele.id)">upd</button> <button v-on:click="_layer_del(ele.id)">del</button>
+      </div>
+      <div class="item" v-show="list.length==0">
+        当前列表没有数据
+      </div>
+
+
+    </div>
+
+
     <!-- layer -->
-    <div class="layer" v-show="user_obj.show">
-      <!-- 盒子 -->
+    <div class="layer" v-show="one.key">
       <div class="layer_box">
         <div class="close" v-on:click="_layer_close()">X</div>
         <div class="main">
-          <div class='layer_core'>
-            <div class="title">
-              {{user_obj.title}}
-            </div>
-            <div class="box">
-              <!-- 添加  -->
-              <div class="add_item" v-show='user_obj.show_add||user_obj.show_upd'>
-                <div class="title">name</div>
-                <div class="info">
-                  <input type="text" id="name" v-model="user_obj.name">
-                </div>
-              </div>
-
-              <!-- del  -->
-              <div class="del_item" v-show='user_obj.show_del'>
-                will u delete this one ?
-              </div>
-
-            </div>
-          </div>
+          <input type="text" id="name" v-model="one.info">
         </div>
-        <div class="yes" v-on:click="_layer_save()">save :)</div>
+        <div class="yes" v-on:click="_layer_sure()">save :)</div>
       </div>
     </div>
-    <!-- add -->
-    <div class="tools">
-      <span v-on:click="_layer_add()">add</span>
-    </div>
-    <!-- =========================================== -->
-    <div class="arr_box">
-      <!--列表 -->
-      <div class="main_box" v-show='arr.length!=0'>
-        <!-- 这是每一项 -->
-        <div class="item arr_item" v-for='ele in arr'>
-          <span class="info">{{$index+1}}</span>
-          <span class="info">{{ele.name}}</span>
-          <span class="tool" v-on:click="_layer_del(ele.id)">del</span>
-          <span class="tool" v-on:click="_layer_upd(ele.id)">upd</span>
-        </div>
-      </div>
-      <!-- 没有信息的提醒 -->
-      <div class="no_list" v-show='arr.length==0'>
-        there is not any item in this list!
-      </div>
-    </div>
-    <!-- =========================================== -->
-    <div class="item">
-      v-model
-    </div>
-    <div class="item">
-      <input type="text" v-model="obj.a">
-    </div>
-    <div class="item">
-      {{obj.a}}
-    </div>
-    <div class="item">
-      **********************************************************
-    </div>
-    <div class="item" v-for='(k,v) in obj'>
-      obj[ {{k}} ] : {{v}}
-    </div>
-    <!-- =========================================== -->
+
   </div>
 
-  <div class="app_2" id="app_2" v-cloak>
-    <div class="item">{{info}}</div>
-    <div class="item" v-for='ele in arr'>
-      id:{{ele.id}} -----> name:{{ele.name}}  
-    </div>
-    <div class="item" v-for='(k,v) in user_obj'>
-      key:{{k}} -----> val:{{v}}
-    </div>
-
-    <div class="item" >
-      <input type="text" v-model='info'>
-    </div>
-  </div>
 
 
 
 </body>
-<!-- JQ -->
-<script src="../script/lib/jquery/jquery.js" type="text/javascript"></script>
-<!-- layer -->
-<script src="../script/lib/layer/layer.js" type="text/javascript"></script>
 <!-- vue -->
 <script src="../script/lib/vue/vue.min.js" type="text/javascript"></script>
 <!-- test -->
 <script src="./test_data.js" type="text/javascript"></script>
 <!-- main -->
 <script src="./index.js" type="text/javascript"></script>
-<script type="text/javascript">
-// $(function() {
-//   new Nav().init();
-// });
-</script>
 
 </html>

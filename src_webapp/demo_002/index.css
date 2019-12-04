@@ -3,7 +3,6 @@
   margin: 0;
   white-space: nowrap;
 }
-
 html,
 body {
   width: 100%;
@@ -11,20 +10,15 @@ body {
   font-family: 'Microsoft Yahei';
   border: 0;
 }
-
-[v-cloak]{
+[v-cloak] {
   display: none;
 }
-
 .red {
   background-color: red;
 }
-
 .blue {
   background-color: blue;
 }
-
-
 /* ------------------------------ */
 input {
   height: 30px;
@@ -32,40 +26,33 @@ input {
   border: none;
   outline: none;
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
-
 button {
   width: 80px;
   height: 30px;
   background-color: #fff;
-  // border: none;
   outline: none;
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   cursor: pointer;
 }
-
-
 .app {
-  // width: 50%;
   position: relative;
   box-sizing: border-box;
-  background-color: rgb(49, 56, 74);
+  background-color: #31384a;
   padding: 30px;
   overflow: auto;
-  // 测试的一项
-  >.box {
-    margin: 0 10px;
-    margin-bottom: 5px;
-    border-radius: 10px;
-    background-color: #ccc;
-    padding: 8px 20px;
-    >.item {
-      font-size: 20px;
-      line-height: 30px;
-      font-weight: 600;
-    }
-  }
 }
-
+.app > .box {
+  margin: 0 10px;
+  margin-bottom: 5px;
+  border-radius: 10px;
+  background-color: #ccc;
+  padding: 8px 20px;
+}
+.app > .box > .item {
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 600;
+}

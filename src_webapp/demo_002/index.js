@@ -3,48 +3,64 @@ var vm = new Vue({
   el: '#app',
   // 数据
   data: {
-    url: './img/1.png',
-    sp_class: 'red ccc',
+    // 属性
+    attr: "",
+    // 
+    className: "",
+    // 
+    css: null,
 
+    // 异步
     ajax: {
-      get_msg: "",
-      post_msg: "",
+      get: "",
+      post: "",
     },
   },
   // 方法
   methods: {
-
-    _change: function(e) {
+    // 点击
+    _btn: function(e) {
+      alert(e.target.nodeName);
+    },
+    _down: function(e) {
+      alert(e.target.value);
+    },
+    _btn_css: function() {
+      this.css = {
+        color: "#" + Math.floor(Math.random() * 1000000)
+      };
+      // console.log(this.css);
 
     },
+
+
+
+    // --------------------------异步
     _ajax_get: function() {
-      var me = this;
-      me.$http
-        .get('./index.js', {
+      this.$http
+        .get('./test_data.js', {
           a: 1,
           b: 2,
         })
         .then(function(res) {
-          me.ajax.get_msg = res.data;
-        }, function() {
-          /* body... */
-        });
+          this.ajax.get = res.data;
+        }.bind(this), function() {});
     },
     // 
     _ajax_post: function() {
-      var me = this;
-      me.$http
-        .post('http://localhost:8080/cors-mot/station/findById.do', {
+      this.$http
+        .post('/api/js_demo/font.do', {
           id: 1,
         }, {
           emulateJSON: true,
         })
         .then(function(res) {
-          res = res.data;
-          me.ajax.post_msg = JSON.stringify(res.data);
-        }, function() {
-          me.ajax.post_msg = "aa";
-        });
+          // console.log(res);
+
+          this.ajax.post = JSON.stringify(res.data);
+        }.bind(this), function() {
+          this.ajax.post = "aa";
+        }.bind(this));
     },
   }
 });

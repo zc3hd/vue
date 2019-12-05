@@ -186,44 +186,6 @@ var tab_3 = Vue.extend({
 
 
 
-
-
-
-
-## .子组件【接收】父组件的数据：子组件设置个【接收】的变量
-
-```
-1.定义要【接收】的变量
-var cp_son = Vue.extend({
-  template: `
-    <span class='info'>{{c_data}}</span>
-    <span class='info'>{{c_obj.a}}</span>
-  `,
-  data: function() {
-    return {
-    }
-  },
-  props:{ 【指定要接收父亲数据的属性】
-    c_data:String,
-    c_obj:Object,
-  },
-});
-
-2.挂载
-components: {
-  span_son: cp_son,
-},
-
-3.使用：类似属性绑定
-<div class="item">
-   <span_son :c_data = 'c_data' :c_obj = 'c_obj'></span_son>
-</div>
-
-4. :c_data.sync='c_data' 儿子变--》父亲变。
-```
-
-
-
 ## 父子传递
 
 ### 父级--->子级

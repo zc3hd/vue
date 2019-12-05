@@ -3,53 +3,49 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>vue</title>
+  <title>Vue1.0 step_05</title>
   <link rel="stylesheet" href="./index.css">
+  <style>
+
+  </style>
 </head>
 
 <body>
-  <!-- ================================ -->
-  <div class="app">
-    <!-- <div class="app_box" id="app_2">
-      <div class="item title">
-        router
-      </div>
-      <ul slot='f_ul'>
-        <li>
-          <a href="#" v-link="{path:'/nav_1'}">nav_1</a>
-        </li>
-        <li>
-          <a href="#" v-link="{path:'/nav_1/a'}">nav_1-a</a>
-        </li>
-        <li>
-          <a href="#" v-link="{path:'/nav_1/b'}">nav_1-b</a>
-        </li>
-        <li>
-        </li>
-        <li>
-          <a href="#" v-link="{path:'/nav_2'}">nav_2</a>
-        </li>
-        <li>
-          <a href="#" v-link="{path:'/nav_2/zhangsan'}">nav_2</a>
-        </li>
-      </ul>
+  <div class="app" id="app" v-cloak>
+
+    <div class="box">
+      <h1>router：路由数据在视图</h1>
+
+      <h6>&nbsp;</h6>
+      <h3>路由选项</h3>
       <div class="item">
+        <a href="#" v-link="{path: '/nav_1'}">nav_1</a>
+        <a href="#" v-link="{path: '/nav_2'}">nav_2</a>
+        <a href="#" v-link="{path: '/nav_more'}">nav_more</a>
       </div>
+    </div>
+
+    <div class="box">
+      <h3>具体路由展示</h3>
       <div class="item">
         <router-view></router-view>
       </div>
-    </div> -->
-    <div class="app_box" id="app_3">
-      <!-- <Nav_1_a></Nav_1_a> -->
     </div>
+
   </div>
+
+
+  <div class="app" id="bpp" v-cloak>
+
+  </div>
+
+
+
 </body>
-<!-- JQ -->
-<!-- <script src="../script/lib/jquery/jquery.js" type="text/javascript"></script> -->
 <!-- vue -->
 <script src="../script/lib/vue/vue.min.js" type="text/javascript"></script>
 <!-- vue-router -->
-<!-- <script src="../script/lib/vue/vue-router/dist/vue-router.js" type="text/javascript"></script> -->
+<script src="../script/lib/vue/vue-router/dist/vue-router.min.js" type="text/javascript"></script>
 <!-- main -->
 <script src="./index.js" type="text/javascript"></script>
 

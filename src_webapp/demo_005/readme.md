@@ -1,141 +1,195 @@
-# Vue step 5
+# Vue1.0 step_05
 
-### router路由   vue-router@0.7.13
+## router
 
-* 什么是路由，就是设计浏览器URL地址，现在是#!/nav_1方式在前端通过vue设置。
-```
-视图在HTML（name-->path）
-<div id="box">
-  <a v-link="{path:'/home'}">主页</a>
-  <a v-link="{path:'/news'}">新闻</a>
-  <router-view></router-view>  
-</div>
-------------------------------------------
-var App=Vue.extend(); 根组件
+* `vue-router@0.7.13`
 
-var Home=Vue.extend({template:'<h3>我是主页</h3>'}); 子组件
-var News=Vue.extend({template:'<h3>我是新闻</h3>'});
-var Detail=Vue.extend({
-  template:`
-  {{$route.params | json}}
-  <br>
-  {{$route.path}}
-  <br>
-  {{$route.query | json}}`
-});
+* 什么是路由：
+  * 前端控制设计浏览器URL地址，形式为#!/nav_1；
+  * 不进行页面转跳；
+  * 不同的地址涉及不同的功能；
+  * 就形成了单页面应用程序；
+* 使用：
+* 1.路由路径数据写在视图层HTML：注意v-link后面需要带引号（后面一大堆的都要带引号，v-for）；
 
-var router=new VueRouter(); 准备路由
-router.map({ 关联
-  'home':{component:Home},
-  'news':{component:News},
-  '/detail/:id':{component:Detail}
-});
+```html
+<div class="app" id="app" v-cloak>
 
-router.redirect({ 跳转
-  '/':'/home'
-});
-
-router.start(App,'#box'); 启动路由
-```
-
-* 如果是后台回来的nav数据，那么上面的方式就不能实现遍历，需下面的方式实现：
-
-```
-视图在组件内，且进行数据遍历
-var App = Vue.extend({
-  template: `
-    <div class="app_box" id="app_3">
-      <ul slot='f_ul'>
-        <li v-for='ele in nav'>
-          <a href="#" v-link="{path:ele.path}">{{ele.name}}</a>
-        </li>
-      </ul>
-      <div class="item">
-        <router-view></router-view>
-      </div>
+    <div class="box">
+        <h1>router：路由数据在视图</h1>
+        <h6>&nbsp;</h6>
+        <h3>路由选项</h3>
+        <div class="item">
+            <a href="#" v-link="{path: '/nav_1'}">nav_1</a>
+            <a href="#" v-link="{path: '/nav_2'}">nav_2</a>
+            <a href="#" v-link="{path: '/nav_more'}">nav_more</a>
+        </div>
     </div>
-  `,
-  data() {
+
+    <div class="box">
+        <h3>具体路由展示</h3>
+        <div class="item">
+            <router-view></router-view>
+        </div>
+    </div>
+
+</div>
+```
+
+* 2.初始化子路由组件:
+  * 注意模板内可以直接使用  $route.params    $route.path   $route.query
+  * $route.params : 需要关联时配置 '/nav_more/:id'
+  * $route.path：访问路径
+  * $route.query：?后面的查询参数；
+
+```js
+// -------------------------------路由子组件
+var nav_1 = Vue.extend({
+  template: `
+    <h4>nav_1的内容</h4>
+    <h4>$route.params.id：{{$route.params.id}}</h4> 
+    <h4>$route.path：{{$route.path}}</h4> 
+    <h4>$route.query：{{$route.query.name}}</h4>
+   `,
+});
+var nav_2 = Vue.extend({
+  template: `
+    <h4>nav_2的内容</h4>
+    <h4>$route.params.id：{{$route.params.id}}</h4> 
+    <h4>$route.path：{{$route.path}}</h4> 
+    <h4>$route.query：{{$route.query.name}}</h4>
+   `
+});
+var nav_more = Vue.extend({
+  template: `
+    <h4> nav_more的内容 </h4>
+    <h4>$route.params.id：{{$route.params.id}}</h4> 
+    <h4>$route.path：{{$route.path}}</h4> 
+    <h4>$route.query：{{$route.query.name}}</h4>
+    `,
+});
+```
+
+* 3.初始化路由、关联配置、默认指向；
+
+```js
+// ------------------------------路由配置
+var router = new VueRouter();
+// 关联
+router.map({
+  '/nav_1': {
+    component: nav_1
+  },
+  '/nav_2': {
+    component: nav_2
+  },
+  '/nav_more/:id': {
+    component: nav_more
+  },
+});
+
+// 默认指向
+router.redirect({
+  "/": '/nav_1',
+  "/nav_more": '/nav_more/1',
+});
+```
+
+* 4.启动路由：
+
+```js
+// ------------------------------------开启：
+// 实例化一个对当前DOM视图的组件
+var App = Vue.extend();
+router.start(App, '#app'); // 只能开启在根节点
+```
+
+* 各项的作用：
+  * iindex HTML模板：配置 名字--->link
+  * 路由关联：link--->cpt
+  * App：让HTML模板成为组件，和路由组件配合；
+
+* 路由的好处：
+  * 用户改路由，页面不刷新，直接到路由指向的组件功能；
+  * 给用户提供极大的便利；
+
+
+
+## 抽象数据
+
+* 1.路由数据在 根组件内拿到，并渲染；
+  * 这里的 `<div class="app" id="bpp">`和模板的标签一样，到时候会完全被替换；
+  * 这个过程相对于：在 配置 名字--->link，且让HTML模板成为组件；
+
+```js
+var Bpp = Vue.extend({
+  template: `
+      <div class="app" id="bpp">
+
+        <div class="box">
+          <h1>router：抽象路由数据</h1>
+
+          <h6>&nbsp;</h6>
+          <h3>路由选项</h3>
+          <div class="item">
+
+            <a href="#" v-for="ele in nav" v-link="{path: ele.path}">{{ele.name}}</a>
+
+          </div>
+        </div>
+
+
+        <div class="box">
+          <h3>具体路由展示</h3>
+          <div class="item">
+            <router-view></router-view>
+          </div>
+        </div>
+
+      </div>
+      `,
+  data: function() {
     return {
-      msg: 'xx',
       nav: [
         { path: '/nav_1', name: 'nav_1' },
-        { path: '/nav_1/a', name: 'nav_1_a' },
-        { path: '/nav_1/b', name: 'nav_1_b' },
-
         { path: '/nav_2', name: 'nav_2' },
-        { path: '/nav_2/zhangsan', name: 'nav_2_zhangsan' },
+        { path: '/nav_more', name: 'nav_more' },
       ]
     }
   },
 });
-
-...
-router.start(App, '#app_3'); 这里组件直接替换指定的ID元素，通过router.start
 ```
 
-* 写的组件直接替换ID元素，也可以这样：
-```
-new Vue({
-  el: '#app_3',
-  components: {  【render: h => h(Nav_1_a)  这个不行】
-    Nav_1_a: Nav_1_a,
-  }
-});
-```
+* 2.准备路由组件：同上
+* 3.初始化路由、关联配置、默认指向；同上；
+* 4.开启：
 
-* 截止到这基本可以写项目了。
-* 到这的时候，突然想到问题，就是我想在JS文件内 import其他文件。但是不行，gulp只是打包，不会模块化处理。那做单页面的怎么配合？
-* 见demo_005_a/b/nav。
-
-```
-【1】文件开启路由，先写几个demo组件。
-nav 
-
-【2】路由配置文件，
-var nav_conf = {
-  '/a': {
-    component: cpt_a
+```js
+// -----------------------------------------路由配置
+var router_B = new VueRouter();
+// 关联
+router_B.map({
+  '/nav_1': {
+    component: nav_1
   },
-  '/b': {
-    component: cpt_b
+  '/nav_2': {
+    component: nav_2
   },
-};
-var nav_redirect = {
-  "/": '/a',
-};
-conf.dev = false;
-
-【3】cpt_a组件dev：
-var cpt_a = Vue.extend({
-  template: `
-    <div class="cpt_a" id="cpt_a">
-      组件A的业务
-    </div>
-  `,
-  data() {
-    return {}
+  '/nav_more/:id': {
+    component: nav_more
   },
 });
 
-【本地测试的时候开启测试】
-if (conf.dev) {
-  new Vue({
-    【本地测试的时候以body为根元素】
-    el: 'body',
-    components: {
-      cpt_a: cpt_a
-    },
-  });
-}
+// 默认指向
+router_B.redirect({
+  "/": '/nav_1',
+  "/nav_more": '/nav_more/1',
+});
 
-css也是以.cpt_a为根节点写。
-
-【4】cpt_a组件完成：
-在nav的HTML进行挂载
-<link rel="stylesheet" href="../demo_005_a/index.css">
-<script type="text/javascript" src="../demo_005_a/index.js"></script>
-
-同时注意router.conf.js中：conf.dev = false;这个是一开始设置好的。
+// 用上面的
+router_B.start(Bpp, '#bpp');
 ```
-* 反而感觉不如webpack处理xx.vue这种组件的方式来的舒服和合理。
+
+* 改路由修改的地址后，路由1的view也会跟着变；就是路由特性；
+
+

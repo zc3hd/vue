@@ -1,4 +1,4 @@
-# Vue step 2
+# Vue1.0 step_02
 
 ## 事件
 

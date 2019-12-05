@@ -3,32 +3,92 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>vue</title>
-  <link rel="stylesheet" href="../script/lib/layer/skin/layer.css">
+  <title>vue1.0-step3</title>
   <link rel="stylesheet" href="./index.css">
 </head>
 
 <body>
   <div class="app" id="app">
-    <div class="item title">
-      生命周期,计算属性?,【vm.$mount('#box'),vm.$watch】,Vue.directive,
+
+    <div class="box">
+      <h1>生命周期</h1>
+      <div class="item">created：{{date.created}} </div>
+      <div class="item">beforeCompile：{{date.beforeCompile}} </div>
+      <div class="item">compiled：{{date.compiled}} </div>
+      <div class="item">ready：{{date.ready}} </div>
     </div>
-    <div class="item">
-      <span @click = 'add()'>
-        add.a
-      </span>
+
+    <div class="box">
+      <h1>计算属性</h1>
+      <div class="item">
+        a: <input type="text" v-model=a> b: <input type="text" v-model=b>
+      </div>
+      <div class="item">
+        c: {{c}}
+      </div>
+      <div class="item">
+        注意： </br>
+        1. v-model拿到的数据类型是字符串!!! </br>
+        2. 只要是函数内部的属性值发生改变，变化的属性值a和计算属性全部能被监听到!!!
+      </div>
     </div>
-    <div class="item" v-for="ele in infos | filterBy '在'" v-cloak v-red>
-      {{ele}}
+
+    <div class="box">
+      <h1>vm属性和方法</h1>
+
+      <h6>&nbsp;</h6>
+      <div class="item">
+        自定义属性的获取 this.obj = JSON.stringify(this.$options.obj) {{obj}}
+      </div>
+
+      <h6>&nbsp;</h6>
+      <div class="item">
+        监听属性（值:简单）watch_a：<input type="text" v-model=watch_a> <br> vm.$watch("watch_a",fn): {{watch_a_str}}
+      </div>
+
+      <h6>&nbsp;</h6>
+      <div class="item">
+        监听属性（值:复杂）watch_obj.info：<input type="text" v-model=watch_obj.info> <br> vm.$watch("watch_obj",fn,{deep:true}): {{watch_obj_str}}
+      </div>
     </div>
+
+
+    <div class="box">
+      <h1>(简单成员)数组过滤</h1>
+      <div class="item">
+        输入过滤关键字：<input type="text" v-model="filter_str_1">
+      </div>
+      <div class="item" v-for="ele in infos | filterBy filter_str_1">
+        <!-- v-for 比较特别，多个单词组成，加引号 -->
+        {{ele}}
+      </div>
+    </div>
+
+
+    <div class="box">
+      <h1>(复杂成员)数组过滤</h1>
+      <div class="item">
+        输入过滤关键字：<input type="text" v-model=filter_str_2>
+      </div>
+      <div class="item" v-for="ele in new_arr">
+        {{ele.info}}
+      </div>
+    </div>
+
+
+
+    <div class="box">
+      <h1>Vue.directive</h1>
+      <div class="item" v-for="ele in arr" v-myfilter=ele>
+        {{ele.info}}
+      </div>
+    </div>
+
+
 
 
   </div>
 </body>
-<!-- JQ -->
-<script src="../script/lib/jquery/jquery.js" type="text/javascript"></script>
-<!-- layer -->
-<script src="../script/lib/layer/layer.js" type="text/javascript"></script>
 <!-- vue -->
 <script src="../script/lib/vue/vue.min.js" type="text/javascript"></script>
 <!-- vue-resource -->
@@ -37,10 +97,5 @@
 <script src="./test_data.js" type="text/javascript"></script>
 <!-- main -->
 <script src="./index.js" type="text/javascript"></script>
-<script type="text/javascript">
-$(function() {
-  new Nav().init();
-});
-</script>
 
 </html>

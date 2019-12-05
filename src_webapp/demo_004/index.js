@@ -1,175 +1,86 @@
-// 全局组件
-var new_span = Vue.extend({
-  template: `#cp_1`,
-  data: function() {
-    return {
-      msg: 'jubu component:new_span_msg--',
-    }
-  },
-  // setInterval()
-  methods: {
-    ck: function() {
-      var me = this;
-      console.log(me.msg);
-    },
-  },
+// ------------------------------------------全局组件
+var new_span_1 = Vue.extend({
+  template: `<span>我是组件1</span>`,
 });
 
 // 全局注册方式
-// Vue.component('new_span',new_span);
-
+Vue.component('new_span_1', new_span_1);
 // 第二种方式
 // Vue.component('new_span', {
 //   template: `<span>new 组件</span>`
 // });
 
 
-var cp_span_1 = Vue.extend({
-  template: `<span class='info'>{{msg}}</span>`,
-  data: function() {
-    return {
-      msg: 'span_1',
-    }
-  },
-});
-var cp_span_2 = Vue.extend({
-  template: `<span class='info'>{{msg}}</span>`,
-  data: function() {
-    return {
-      msg: 'span_2',
-    }
-  },
-});
-var cp_span_3 = Vue.extend({
-  template: `<span class='info'>{{msg}}</span>`,
-  data: function() {
-    return {
-      msg: 'span_3',
-    }
-  },
+// ------------------------------------------局部组件
+var new_span_2 = Vue.extend({
+  template: `<span>我是组件2</span>`,
 });
 
 
 
-// Vue.extend({
-//   template:`<span class='info'>{{msg}}></span>`
-//   data:function () {
-//     return {
-
-//     };
-//   },
-
-// });
-
-
-
-// ================================================父亲给儿子
-// 用于传数据的子组件
-var cp_send_to_son = Vue.extend({
-  template: `
-              <span class='info'>{{msg}}</span>
-              </br>
-              <span class='blue'>{{c_data}}</span>
-              </br>
-              <span class='blue'>{{c_obj.a}}</span>
-            `,
-  data: function() {
-    return {
-      msg: `
-                i am a son component of father,
-                i recive a data from my father:
-                `,
-      // c_data:'aa',
-    }
-  },
-  created: function() {
-    // alert('vm实力创建完成--初始化data methods')
-    console.log("son_1");
-  },
-  // 编译之前 寻找模板 指令 
-  beforeCompile: function() {
-    /* body... */
-    // alert('编译之前 寻找模板 指令')
-    console.log("son_2");
-  },
-  // 编译之后 替换为我们的数据
-  compiled: function() {
-    /* body... */
-    // alert('编译之后 替换为我们的数据')
-    console.log("son_3");
-  },
-  ready: function() {
-
-    console.log("son_4");
-
-  },
-  // props:['c_data'],
-  props: {
-    c_data: String,
-    c_obj: Object,
-  },
-});
-var cp_f_to_son_2 = Vue.extend({
-  template: `<span>{{f_str}}</span>`,
-  data: function() {
-    return {
-      // info:'aaa',
-    };
-  },
-  // 用于接收父亲的属性
-  props: {
-    f_str: String,
-  },
-});
-
-// ================================================父亲接收儿子
-// 用于传数据的子组件
-var cp_send_to_f = Vue.extend({
-  template: `
-              <span class='info' @click='send_to_f'>{{msg}}</span>
-            `,
-  data: function() {
-    return {
-      msg: `i am a son data`,
-    }
-  },
-  methods: {
-    send_to_f: function() {
-      var me = this;
-      me.msg = me.msg + Math.floor(100 * Math.random());
-      me.$emit('ev_send_to_f', me.msg);
-    },
-  },
-  ready: function() {
-    var me = this;
-    setTimeout(function() {
-      // me.msg = "xxxxxxxxxxxxxxxxxxxxxxxxxxx",
-      // me.$emit('ev_send_to_f', "xxxxxxxxxxxxxxx-ready");
-    }, 1000);
-
-  },
-});
-
-
-var cp_send_to_f_2 = Vue.extend({
-  template: `<span @click='send_f()'>{{info}}</span>`,
-  data: function() {
-    return {
-      info: 1,
-    }
-  },
-  methods:{
-    send_f:function () {
-      var me = this;
-      me.$emit('emit_s2',me.info)
-    },
+// ------------------------------------------tab
+var tab_1 = Vue.extend({
+  template: `<span>tab-1 info</span>`,
+  destroyed: function() {
+    // 被其他组件代替的时，该组件销毁，这个函数执行
+    alert(1);
   }
-})
+});
+var tab_2 = Vue.extend({
+  template: `<span>tab-2 info</span>`,
+});
+var tab_3 = Vue.extend({
+  template: `<span>tab-3 info</span>`,
+});
 
 
+// --------------------------------------------传递数据
+// 接受数据
+var son_1 = Vue.extend({
+  template: `
+   <span>
+      子级组件，接受到父级的数据： </br>
+      str：{{s_str}} </br>
+      obj：{{s_obj.info}} </br>
+   </span>
+  `,
+  // 用于要接收父亲数据的属性名，使用在本组件标签上；
+  props: {
+    s_str: String,
+    s_obj: Object,
+  },
+});
 
 
+// 发射数据
+var son_2 = Vue.extend({
+  template: `
+   <span>
+      子级组件： </br>
+      str：{{s_str}} </br>
+      obj：{{s_obj.info}} </br>
+   </span>
+  `,
+  data: function() {
+    return {
+      s_str: "我是子级str上的val",
+      s_obj: { info: "我是子级obj上val" }
+    }
+  },
+  ready: function() {
+    // 相当于是 给子组件自己 定义了 自己的事件名称，后面是触发事件时传入执行函数的参数
+    this.$emit("str", this.s_str);
 
+    // 注意这里发射的是对象，地址；
+    this.$emit("obj", this.s_obj);
+
+
+    setTimeout(() => {
+      this.s_str = 10;
+      this.$emit("str", this.s_str);
+    }.bind(this), 1000);
+  }
+});
 
 
 // 实例化一个对当前DOM数组件
@@ -178,180 +89,81 @@ var vm = new Vue({
   el: '#app',
   // 数据
   data: {
-    transition_key: false,
-    animate_key: false,
+    // 动画
+    key: 1,
+    animate_name: 'bounce',
 
-    // ===================
-    box_2_level: 0,
-    box_2_class: '',
-
-    // ===================
-    table_name: 'span_1',
-
-    // ===================
-    // 用于父传子的数据
-    c_data: 'i am a data of father',
-    c_obj: {
-      a: 1
-    },
+    // tab组件的名称
+    ac: "tab_1",
 
 
-    // =====================
-    // 用于接收的数据
-    f_son_msg: '--'
+    // 传递---->子组件的数据
+    p_str: "我是父级str的val",
+    p_obj: { info: "我是父级obj上val" },
+
+
+    // 接受 来自 子组件的数据
+    from_s_str: "",
+    from_s_obj: null,
   },
 
   // 方法
   methods: {
-
-    transition: function() {
-      var me = this;
-      me.transition_key = !me.transition_key;
-    },
-    animate: function(key) {
-      var me = this;
-      // ==========================================
-      // 老师的
-      // me.animate_key = !me.animate_key;
-
-      // if (me.animate_key) {
-      //   me.box_2_class = 'zoomInLeft';
-      // }
-      // else {
-      //   me.box_2_class = 'zoomOutRight';
-      // }
-
-      // ==========================================
-      // 我自己的--单个变化
-      // me.box_2_class = 'rubberBand';
-
-      // setTimeout(function () {
-      //   me.box_2_class = '';
-      // },1100);
-
-
-      // ==========================================
+    // 过渡
+    animate: function() {
       // 我自己的--分级变化
-      me.box_2_level++;
-      if (me.box_2_level == 6) {
-        me.box_2_level = 1;
+      this.key++;
+      if (this.key == 6) {
+        this.key = 1;
       }
 
-      switch (me.box_2_level) {
-        // case 1:
-        //   me.box_2_class = 'demo_animated_box_1';
-        //   console.log(1, key);
-        //   break;
-        // case 2:
-        //   me.box_2_class = 'demo_animated_box_2';
-        //   break;
-        // case 3:
-        //   me.box_2_class = 'demo_animated_box_3';
-        //   break;
-        // case 4:
-        //   me.box_2_class = 'demo_animated_box_2';
-        //   break;
-        // case 5:
-        //   me.box_2_class = 'demo_animated_box_4';
-        //   break;
+      switch (this.key) {
+
         case 1:
-          me.box_2_class = 'bounce';
+          this.animate_name = 'bounce';
           break;
         case 2:
-          me.box_2_class = 'flash';
+          this.animate_name = 'flash';
           break;
         case 3:
-          me.box_2_class = 'pulse';
+          this.animate_name = 'pulse';
           break;
         case 4:
-          me.box_2_class = 'rubberBand';
+          this.animate_name = 'rubberBand';
           break;
         case 5:
-          me.box_2_class = 'shake';
+          this.animate_name = 'shake';
           break;
       }
 
-
-      // setTimeout(function () {
-      //   me.animate();
-      // },900)
-
-
-      // setTimeout(function() {
-      //   me.box_2_class = '';
-      // }, 1100);
     },
-
-    // 从子组件接收数据
-    get_from_s: function(msg) {
-      var me = this;
-      me.f_son_msg = msg;
-    },
-    get_from_s_2:function (msg) {
-      var me = this;
-      me.f_son_msg = msg;
-    },
-  },
-
-  // 局部组件
-  components: {
-    new_span: new_span,
-
-    // ======================
-    span_1: cp_span_1,
-    span_2: cp_span_2,
-    span_3: cp_span_3,
-
-    // ======================
-    cp_send_to_son: cp_send_to_son,
     // 
-    cp_f_to_son_2: cp_f_to_son_2,
-
-    // ======================
-    cp_send_to_f: cp_send_to_f,
-
-    cp_send_to_f_2:cp_send_to_f_2,
+    tab: function(info) {
+      // console.log(info);
+      this.ac = "tab_" + info;
+    },
+    // 子组件发射过来数据时，执行这些函数
+    _str: function(data) {
+      // console.log(data);
+      this.from_s_str = data;
+    },
+    _obj: function(data) {
+      // console.log(data);
+      this.from_s_obj = data;
+    }
+  },
+  // 
+  components: {
+    // 局部组件
+    "new_span_2": new_span_2,
+    // -----------------------------------------------tab
+    "tab_1": tab_1,
+    "tab_2": tab_2,
+    "tab_3": tab_3,
+    // -----------------------------------------------传递数据
+    "son_1": son_1,
+    "son_2": son_2,
   },
 
-  // transitions: {
-  //   bounce: {
-  //     enterClass: 'zoomInLeft',
-  //     leaveClass: 'zoomOutRight'
-  //   }
-  // },
 
-  // 生命周期
-  // vm实力创建完成--初始化data methods
-  created: function() {
-    // alert('vm实力创建完成--初始化data methods')
-    console.log(1);
-
-  },
-  // 编译之前 寻找模板 指令 
-  beforeCompile: function() {
-    /* body... */
-    // alert('编译之前 寻找模板 指令')
-    console.log(2);
-  },
-  // 编译之后 替换为我们的数据
-  compiled: function() {
-    /* body... */
-    // alert('编译之后 替换为我们的数据')
-    console.log(3);
-  },
-  // 真实的把数据插入DOM节点中
-  ready: function() {
-    // alert('真实的把数据插入DOM节点中')
-    console.log(4);
-
-  },
-
-  // 销毁之前
-  beforeDestroy: function() {
-    /* body... */
-  },
-  // 销毁之后
-  destroyed: function() {
-    /* body... */
-  },
 });

@@ -3,121 +3,105 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>vue</title>
-  <link rel="stylesheet" href="../script/lib/layer/skin/layer.css">
+  <title>Vue1.0 step_04</title>
   <link rel="stylesheet" href="../script/lib/Animate_css/animate.css">
   <link rel="stylesheet" href="./index.css">
 </head>
 
 <body>
-  <div class="app" id="app">
-    <div class="item title">
-      animate
-    </div>
+  <div class="app" id="app" v-cloak>
 
-
-    <div class="item">
-      <span @click='transition()'>
-        transition
-      </span>
-    </div>
-    <div class="demo_box" v-show='transition_key' transition='demo_box'>
-    </div>
-
-
-
-
-    
-    <div class="item">
-      <span @click.prevent='animate(1)'>
-        animate
-      </span>
-    </div>
-    <!-- <div class="demo_animated_box animated" transition='bounce' v-show='animate_key'> -->
-    <div class="demo_animated_box animated" :class='box_2_class'>
+    <!-- --------------------------------------------- -->
+    <div class="box">
+      <h1>animate</h1>
+      <div class="item">
+        <button @click=animate()>btn</button>
+      </div>
+      <div class="item demo_animated_box animated" :class=animate_name>
+        演示区域
+      </div>
     </div>
 
 
 
-    <!-- =================================================== -->
-    <div class="item title">
-      component Vue.component("name",class);
-    </div>
-    <div class="item">
-      <new_span></new_span>
-    </div>
-    <!-- =================================================== -->
-    <div class="item title">
-      component--选项卡
-    </div>
-    <div class="item">
-       <span class="blue" @click='table_name="span_1"'>cp-1</span>
-       <span class="blue" @click='table_name="span_2"'>cp-2</span>
-       <span class="blue" @click='table_name="span_3"'>cp-3</span>
-    </div>
-    <div class="item">
-       <component :is='table_name'></component>
+    <!-- -----------------------------------------------组件 -->
+    <div class="box">
+      <h1>component</h1>
+      <div class="item">
+        全局组件：
+        <new_span_1></new_span_1>
+      </div>
+      <div class="item">
+        局部组件：
+        <new_span_2></new_span_2>
+      </div>
     </div>
 
 
-    <!-- =================================================== -->
-    <div class="item title">
-      component 父组件->传数据-->子组件
-    </div>
-    <div class="item">
-       <span class="info" >in father:</span>
-       </br>
-       <span class="blue" >
-        String:<input type="text" v-model='c_data'>
-       </span>
-       <span class="blue" >string:{{c_data}}</span>
-    </div>
 
-    <div class="item">
-       <span class="blue" >
-        OBJ:<input type="text" v-model='c_obj.a'>
-       </span>
-       <span class="blue" >Object:{{c_obj.a}}</span>
+    <!-- -----------------------------------------------tab -->
+    <div class="box">
+      <h1>component tab</h1>
+      <div class="item">
+        <button @click=tab(1)>tab-1</button>
+        <button @click=tab(2)>tab-2</button>
+        <button @click=tab(3)>tab-3</button>
+      </div>
+      <div class="item">
+        <component :is=ac></component>
+      </div>
     </div>
-    <div class="item">
-       <cp_send_to_son :c_data = 'c_data' :c_obj = 'c_obj'></cp_send_to_son>
-       <cp_f_to_son_2 :f_str ='c_data'></cp_f_to_son_2>
-    </div>
-    </br>
-    </br>
-  
 
 
 
+    <!-- -----------------------------------------------父子传递 -->
+    <div class="box">
+      <h1>父子传递</h1>
 
 
-    <!-- =================================================== -->
-    <div class="item title">
-      component 父组件《--收数据《--子组件
+
+      <!-- ----------------------------------1 -->
+      <h6>&nbsp;</h6>
+      <h2>1.父级--->子级</h2>
+      <div class="item">
+        父级组件： </br>
+        p_str :{{p_str}} <input type="text" v-model=p_str> </br>
+        p_obj.info :{{p_obj.info}} <input type="text" v-model=p_obj.info></br>
+      </div>
+      <h6>&nbsp;</h6>
+      <div class="item">
+        <son_1 :s_str=p_str :s_obj=p_obj></son_1>
+      </div>
+
+      <!-- ----------------------------------2 -->
+      <h6>&nbsp;</h6>
+      <h2>2.子级--->父级</h2>
+      <div class="item">
+        <son_2 @str=_str @obj=_obj></son_2>
+      </div>
+      <div class="item">
+        父级组件： </br>
+        str :{{from_s_str}} </br>
+        obj :{{from_s_obj.info}} </br>
+      </div>
+
+
     </div>
-    <div class="item">
-       <span class="info" >in father:</span>
-       <span class="blue" >old msg:{{f_son_msg}}</span>
-    </div>
-    <div class="item">
-       <cp_send_to_f @ev_send_to_f = 'get_from_s'></cp_send_to_f>
-       <cp_send_to_f_2 @emit_s2 = 'get_from_s_2'></cp_send_to_f_2>
-       <!-- <span_son></span_son> -->
-    </div>
+
+
+
+
 
 
   </div>
-  
 
 
-  <template id="cp_1">
-    <span @click = 'ck()'>{{msg}}</span>
-  </template>
+
+
+
+
+
 </body>
-<!-- JQ -->
-<script src="../script/lib/jquery/jquery.js" type="text/javascript"></script>
-<!-- layer -->
-<script src="../script/lib/layer/layer.js" type="text/javascript"></script>
 <!-- vue -->
 <script src="../script/lib/vue/vue.min.js" type="text/javascript"></script>
 <!-- vue-resource -->
@@ -126,10 +110,5 @@
 <script src="./test_data.js" type="text/javascript"></script>
 <!-- main -->
 <script src="./index.js" type="text/javascript"></script>
-<script type="text/javascript">
-// $(function() {
-//   new Nav().init();
-// });
-</script>
 
 </html>

@@ -183,6 +183,10 @@ var nav_1 = {
       <h4>$route.path：{{$route.path}}</h4> 
       <h4>$route.query：{{$route.query.name}}</h4>
     </div>`,
+  mounted: function() {
+    console.log(this);
+
+  },
 };
 var nav_2 = {
   template: `
@@ -235,8 +239,10 @@ var router = new VueRouter({
 
 // 开启路由
 new Vue({
-  // 可以为class dom 
+  // 绑定组件
   el: '#router_box',
   render: h => h(router_box),
+
+  // 设置路由
   router: router,
 });

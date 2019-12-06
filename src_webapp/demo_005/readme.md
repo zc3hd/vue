@@ -70,6 +70,22 @@ var nav_more = Vue.extend({
 });
 ```
 
+* 为什么子路由组件可以 $route这些？**因为路由组件实例化对象上已经有该属性（值为对象）**
+
+```js
+var nav_1 = Vue.extend({
+  template: `
+    <h4>nav_1的内容</h4>
+    <h4>$route.params.id：{{$route.params.id}}</h4> 
+    <h4>$route.path：{{$route.path}}</h4> 
+    <h4>$route.query：{{$route.query.name}}</h4>
+   `,
+  created: function() {
+    console.log(this.$route, this.$router);
+  }
+});
+```
+
 * 3.初始化路由、关联配置、默认指向；
 
 ```js

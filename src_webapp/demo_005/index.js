@@ -6,6 +6,9 @@ var nav_1 = Vue.extend({
     <h4>$route.path：{{$route.path}}</h4> 
     <h4>$route.query：{{$route.query.name}}</h4>
    `,
+  created: function() {
+    console.log(this.$route, this.$router);
+  }
 });
 var nav_2 = Vue.extend({
   template: `

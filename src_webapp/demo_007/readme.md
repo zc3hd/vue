@@ -198,79 +198,149 @@ var methods = {
 
 
 
-
-
-
-
 ## vue-router@2.0.1
 
-* 和vue-router@1.x.x一样，有三种写代码的方式，可以参加demo_005
-* 最后我们确认选择第三种方式配置我们的路由：**路由数据在组件内，在组件模板内遍历；**
+* 需知：
+  * 和vue-router@1.x.x一样，有三种写代码的方式，可以参考demo_005
+  * 最后我们确认选择第三种方式配置我们的路由：**路由数据在组件内，在组件模板内遍历；**
+* 1.准备路由视图组件：路由数据异步获取，设置 名字-->link
 
+```js
+// --------------------路由视图组件
+var router_box = {
+  template: `
+    <div id="router_box">
+      <div class="box">
+        <h1>router：路由数据在组件内，在组件模板内遍历</h1>
+
+        <h6>&nbsp;</h6>
+        <h3>路由选项</h3>
+        <div class="item">
+          <router-link to='/nav_1'>nav_1</router-link>
+          <router-link to='/nav_2'>nav_2</router-link>
+          <router-link to='/nav_more'>nav_more</router-link>
+        </div>
+      </div>
+
+      <div class="box">
+        <h3>具体路由展示</h3>
+        <div class="item">
+          <router-view></router-view>
+        </div>
+      </div>
+    </div>
+  `,
+  data: function() {
+    return {
+      nav: null
+    }
+  },
+  mounted: function() {
+    setTimeout(() => {
+      // console.log(this);
+      this.nav = [
+        { path: '/nav_1', name: 'nav_1' },
+        { path: '/nav_2', name: 'nav_2' },
+        { path: '/nav_more', name: 'nav_more' },
+      ];
+    }, 1000);
+  }
+};
 ```
-【视图在HTML】
-HTML: name-->path
-  <router-link to='/nav_1'>nav_1</router-link>
-  <router-link to='/nav_2'>nav_2</router-link>
-  <router-view></router-view> 
 
-JS:
+* 2.准备路由组件：路由组件内部参数还可以继续使用；
+
+```js
+// --------------------路由组件
 var nav_1 = {
-  template: `nav_1_info-xxxxxxxxxxxxxx`,
+  template: `
+    <div>
+      <h4>nav_1的内容</h4>
+      <h4>$route.params.id：{{$route.params.id}}</h4> 
+      <h4>$route.path：{{$route.path}}</h4> 
+      <h4>$route.query：{{$route.query.name}}</h4>
+    </div>`,
 };
 var nav_2 = {
-  template: `nav_2_info-xxxxxxxxxxxxxx`,
+  template: `
+    <div>
+      <h4>nav_2的内容</h4>
+      <h4>$route.params.id：{{$route.params.id}}</h4> 
+      <h4>$route.path：{{$route.path}}</h4> 
+      <h4>$route.query：{{$route.query.name}}</h4>
+    </div>`,
 };
+var nav_more = {
+  template: `
+    <div>
+      <h4>nav_more的内容</h4>
+      <h4>$route.params.id：{{$route.params.id}}</h4> 
+      <h4>$route.path：{{$route.path}}</h4> 
+      <h4>$route.query：{{$route.query.name}}</h4>
+    </div>`,
+};
+```
 
-【配置path-->cpt】配置和指定
+* 3.设置 关联：link--->cpt、设置默认指向；
+
+```js
+// -----------------配置：path-->组件 关联、默认指向
 var routes = [
+  // -----关联
   {
     path: '/nav_1',
     component: nav_1,
   },
+  // 
   {
     path: '/nav_2',
     component: nav_2,
   },
+  // 
+  {
+    path: '/nav_more/:id',
+    component: nav_more,
+  },
+  // ------默认指向
+  { path: '/', redirect: '/nav_1' },
+  // 
+  { path: '/nav_more', redirect: '/nav_more/1' }
 ];
+// 
 var router = new VueRouter({
   routes: routes,
 });
-
-new Vue({  开启路由
-  el:'#app',
-  router:router,
-});
-
 ```
 
-- 视图在组件里，这样就是可以把后台回来的nav数据，在视图组件里进行循环。
+* 4.开启路由：
 
-```
-JS:
-var view_cpt = {
-  template:`
-  <router-link to='/nav_1'>nav_1</router-link>
-  <router-link to='/nav_2'>nav_2</router-link>
-  <router-view></router-view> 
-  `,
-};
+```js
+// 开启路由
 new Vue({
-  el:'#app',
-  render:h=>h(view_cpt), 【这个是把 #app 这个容器DOM 完全替换为视图组件】
-  router:router,
+  // 绑定组件
+  el: '#router_box',
+  render: h => h(router_box),
+
+  // 设置路由
+  router: router,
 });
 ```
 
-- 路由对象router的新方法：
+- 其他：router配置到组件后，**路由组件**内的属性；
+  - `this.$route`：对象
+  - `this.$router`：对象（方法）；
+    - back
+    - go
+    - push
+    - replace()
 
-```
+* 使用：
+
 直接添加一个路由,表现切换路由，本质往历史记录里面添加一个
-router.push({path:'home'});  
+router.push({path:'home'});
 
 替换当前的路由，不会往历史记录里面添加
 router.replace({path:'news'})
-```
 
 
 

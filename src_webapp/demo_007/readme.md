@@ -329,18 +329,42 @@ new Vue({
 - 其他：router配置到组件后，**路由组件**内的属性；
   - `this.$route`：对象
   - `this.$router`：对象（方法）；
-    - back
     - go
     - push
     - replace()
 
-* 使用：
+* 切换路由的使用：
 
-直接添加一个路由,表现切换路由，本质往历史记录里面添加一个
-router.push({path:'home'});
+```js
+var nav_1 = {
+  template: `
+    <div>
+      <h4>nav_1的内容</h4>
+      <h4>$route.params.id：{{$route.params.id}}</h4> 
+      <h4>$route.path：{{$route.path}}</h4> 
+      <h4>$route.query：{{$route.query.name}}</h4>
 
-替换当前的路由，不会往历史记录里面添加
-router.replace({path:'news'})
+      <button @click=go(1)>go(1) 下一路由</button>
+      <button @click=go(-1)>go(-1) 上一路由</button>
+      <button @click=push()>push 历史记录且转跳到/nav_2路由</button>
+      <button @click=replace()>replace 当前历史记录且转跳到/nav_2路由</button>
+    </div>`,
+  methods: {
+    // 参数需要number类型，-1为上一个历史记录，1为下一个历史记录（必须得有历史记录）
+    go: function(num) {
+      this.$router.go(num);
+    },
+    // 直接添加一个路由,表现切换路由，本质往历史记录里面添加一个
+    push: function() {
+      this.$router.push({ path: "/nav_2" });
+    },
+    // 替换当前的路由，不会往历史记录里面添加
+    replace: function() {
+      this.$router.replace({ path: "/nav_2" });
+    }
+  },
+};
+```
 
 
 

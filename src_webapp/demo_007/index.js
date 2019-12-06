@@ -182,10 +182,24 @@ var nav_1 = {
       <h4>$route.params.id：{{$route.params.id}}</h4> 
       <h4>$route.path：{{$route.path}}</h4> 
       <h4>$route.query：{{$route.query.name}}</h4>
-    </div>`,
-  mounted: function() {
-    console.log(this);
 
+      <button @click=go(1)>go(1) 下一路由</button>
+      <button @click=go(-1)>go(-1) 上一路由</button>
+      <button @click=push()>push 历史记录且转跳到/nav_2路由</button>
+      <button @click=replace()>replace 当前历史记录且转跳到/nav_2路由</button>
+    </div>`,
+  methods: {
+    go: function(num) {
+      this.$router.go(num);
+    },
+    // 
+    push: function() {
+      this.$router.push({ path: "/nav_2" });
+    },
+    // 
+    replace: function() {
+      this.$router.replace({ path: "/nav_2" });
+    }
   },
 };
 var nav_2 = {

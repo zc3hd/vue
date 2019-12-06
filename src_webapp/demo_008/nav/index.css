@@ -1,0 +1,66 @@
+* {
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-family: 'Microsoft Yahei';
+  border: 0;
+}
+[v-cloak] {
+  display: none;
+}
+/* ------------------------------ */
+input {
+  height: 30px;
+  width: 300px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+a {
+  display: inline-block;
+  padding: 0 20px;
+  height: 30px;
+  line-height: 30px;
+  text-decoration: none;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  color: #222;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-right: 10px;
+}
+button {
+  width: 80px;
+  height: 30px;
+  background-color: #fff;
+  outline: none;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+.app {
+  position: relative;
+  box-sizing: border-box;
+  background-color: #31384a;
+  padding: 16px;
+  overflow: auto;
+}
+.app .box {
+  margin: 0 10px;
+  margin-bottom: 5px;
+  border-radius: 10px;
+  background-color: #ccc;
+  padding: 8px 20px;
+}
+.app .box .item {
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 600;
+}

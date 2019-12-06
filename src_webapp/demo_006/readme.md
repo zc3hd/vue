@@ -57,12 +57,18 @@ var App = Vue.extend({
       `,
   data: function() {
     return {
-      nav: [
-        { path: '/a', name: 'a' },
-        { path: '/b', name: 'b' },
-      ]
+      nav: null
     }
   },
+  // 
+  created: function() {
+    setTimeout(() => {
+      this.nav = [
+        { path: '/a', name: 'a' },
+        { path: '/b', name: 'b' },
+      ];
+    }, 1000);
+  }
 });
 
 // -----------------------------------------路由配置
@@ -220,7 +226,7 @@ var redirect = {
 }
 ```
 
-* index.js：组件测试
+* index.js：**组件测试**
 
 ```js
 // 路由组件

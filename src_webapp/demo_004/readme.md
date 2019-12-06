@@ -121,6 +121,27 @@ var new_span = Vue.extend({
 
 
 
+## Vue.extend
+
+* Vue.extend这个函数是谁的函数？是函数原型对象上的方法，用于拓展类！
+* OK，那么 `var new_span = Vue.extend()`是什么玩意？【**类！！**】
+
+* 那么类可以怎么用呢？实例化，使用$mount方法；
+
+```js
+// ------------------------------------------Vue.extend
+var A = Vue.extend({
+  template: `<span>我是Vue.extend继承的类，被实例化的组件</span>`,
+});
+
+// A：类
+(new A()).$mount("#one");
+
+// 为什么？测试组件可以这样用啊！！
+```
+
+
+
 
 
 ## tab选项卡
@@ -230,7 +251,7 @@ var son_1 = Vue.extend({
 
 * 1.自定义子组件：
   * **this.$emit  相当于是 给子组件自己 定义了 自己的事件名称，后面是触发事件时传入执行函数的参数**
-  * 也是触发该事件；
+  * 同时也是触发该事件；
 
 ```js
 // 发射数据
@@ -274,7 +295,7 @@ var son_2 = Vue.extend({
 </div>
 ```
 
-* 3.被执行的父级的函数：
+* 3.执行后面的函数：被执行的父级的函数：
 
 ```js
     // 子组件发射过来数据时，执行这些函数
@@ -294,8 +315,15 @@ var son_2 = Vue.extend({
   * 若传递的是简单类型，父级数据不会发生改变，若要改变需要重新发送；
 
   ```js
-  setTimeout(() => {
+  // 直接JS混淆，对es6语法不支持；需要gulp开启babel
+  setTimeout(function() {
       this.s_str = 10;
       this.$emit("str", this.s_str);
   }.bind(this), 1000);
+  
+  // 注意es6 箭头函数的绑定；
+  setTimeout((() => {
+      this.s_str = 10;
+      this.$emit("str", this.s_str);
+  }).bind(this), 1000);
   ```

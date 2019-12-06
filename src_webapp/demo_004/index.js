@@ -34,6 +34,20 @@ var tab_3 = Vue.extend({
 });
 
 
+// ------------------------------------------Vue.extend
+var A = Vue.extend({
+  template: `<span>我是Vue.extend继承的类，被实例化的组件</span>`,
+});
+
+// A：类
+(new A()).$mount("#one");
+
+// 为什么？测试组件可以这样用啊！！
+
+
+
+
+
 // --------------------------------------------传递数据
 // 接受数据
 var son_1 = Vue.extend({
@@ -75,15 +89,23 @@ var son_2 = Vue.extend({
     this.$emit("obj", this.s_obj);
 
 
-    setTimeout(() => {
+    // 直接JS混淆，对es6语法不支持；需要gulp开启babel
+    setTimeout(function() {
       this.s_str = 10;
       this.$emit("str", this.s_str);
     }.bind(this), 1000);
+
+    setTimeout((() => {
+      this.s_str = 10;
+      this.$emit("str", this.s_str);
+    }).bind(this), 1000);
+
+
   }
 });
 
 
-// 实例化一个对当前DOM数组件
+// -------------------------------------------------------根组件
 var vm = new Vue({
   // 可以为class dom 
   el: '#app',

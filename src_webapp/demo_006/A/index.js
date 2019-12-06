@@ -1,4 +1,4 @@
-// 路由组件
+// 路由组件：继承了一个类；
 var A = Vue.extend({
   template: `
     <div class="A">
@@ -11,10 +11,18 @@ var A = Vue.extend({
 });
 
 
+// 
+// console.log(A, Vue);
+// 本地测试：
+(new A()).$mount("body");
+
+
 // 本地测试
-// new Vue({
+// var vm = new Vue({
 //   el: 'body',
 //   components: {
 //     "cpt_a": A
 //   },
 // });
+
+// console.log(vm);

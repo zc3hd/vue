@@ -28,12 +28,18 @@ var App = Vue.extend({
       `,
   data: function() {
     return {
-      nav: [
-        { path: '/a', name: 'a' },
-        { path: '/b', name: 'b' },
-      ]
+      nav: null
     }
   },
+  // 
+  created: function() {
+    setTimeout(() => {
+      this.nav = [
+        { path: '/a', name: 'a' },
+        { path: '/b', name: 'b' },
+      ];
+    }, 1000);
+  }
 });
 
 // -----------------------------------------路由配置

@@ -11,18 +11,15 @@ var A = Vue.extend({
 });
 
 
-// 
-// console.log(A, Vue);
+// ------需要在提交前被注释；
 // 本地测试：
-(new A()).$mount("body");
+// (new A()).$mount("body");
 
 
 // 本地测试
-// var vm = new Vue({
+// new Vue({
 //   el: 'body',
 //   components: {
 //     "cpt_a": A
 //   },
 // });
-
-// console.log(vm);

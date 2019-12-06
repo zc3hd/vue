@@ -241,13 +241,18 @@ var A = Vue.extend({
    `,
 });
 
-// 本地测试：需要注释；
-new Vue({
-  el: 'body',
-  components: {
-    "cpt_a": A
-  },
-});
+// ------需要在提交前被注释；
+// 本地测试：
+(new A()).$mount("body");
+
+
+// 本地测试
+// new Vue({
+//   el: 'body',
+//   components: {
+//     "cpt_a": A
+//   },
+// });
 ```
 
 * 合并测试：

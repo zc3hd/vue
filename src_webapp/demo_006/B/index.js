@@ -11,7 +11,12 @@ var B = Vue.extend({
 });
 
 
-// 本地测试完毕后，要注释
+// ------需要在提交前被注释；
+// 本地测试：
+// (new B()).$mount("body");
+
+
+// 本地测试
 // new Vue({
 //   el: 'body',
 //   components: {

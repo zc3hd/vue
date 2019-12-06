@@ -1,3 +1,11 @@
+// ---------------------------------------遍历的组件
+// 被遍历的组件，作为标签使用，自定义属性会加在根标签上；
+var cpt = {
+  template: `<div class="item">遍历的组件</div>`,
+};
+
+
+
 // ---------------------------------------自定义组件
 var cpt_1 = {
   template: `<div class="item">全局 自定义组件</div>`,
@@ -64,14 +72,22 @@ var vm = new Vue({
   el: '#app',
 
   data: {
-    // 遍历
+    // v-for测试数据
     obj: {
       a: 1,
       b: 2
     },
     arr: [1, 2, 3, 1],
 
-    // 异步
+
+    // ----------遍历
+    obj_1: {
+      a: 1,
+      b: 2
+    },
+
+
+    // -----------异步
     ajax: {
       get: "",
       post: "",
@@ -79,8 +95,10 @@ var vm = new Vue({
   },
   components: {
     // 局部组件
+    "cpt": cpt,
     'cpt_2': cpt_2,
-    // 通信
+
+    // 通信的兄弟组件
     "bro_1": bro_1,
     "bro_2": bro_2,
   },
@@ -142,9 +160,7 @@ var router_box = {
         <h6>&nbsp;</h6>
         <h3>路由选项</h3>
         <div class="item">
-          <router-link to='/nav_1'>nav_1</router-link>
-          <router-link to='/nav_2'>nav_2</router-link>
-          <router-link to='/nav_more'>nav_more</router-link>
+          <router-link v-for="ele in nav" :to=ele.path>{{ele.name}}</router-link>
         </div>
       </div>
 

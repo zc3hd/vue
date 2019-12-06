@@ -29,6 +29,26 @@
 
     </div>
 
+
+
+    <!-- ----------------------------------------------------遍历标签 -->
+    <div class="box">
+      <h1>遍历</h1>
+
+      <h6>&nbsp;</h6>
+      <h3>标签或组件</h3>
+      <div class="item" v-for="(val,key) in obj_1" :_key=key>
+        每个标签上有自定义属性 _key={{key}}
+      </div>
+
+      <cpt v-for="(val,key) in obj_1" :_key=key></cpt>
+
+      <div class="item" v-for="(val,key) in obj_1" v-html=key>
+      </div>
+
+
+    </div>
+
     <!-- ---------------------------------------------------自定义组件 -->
     <div class="box">
       <h1>component：基本使用</h1>

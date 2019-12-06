@@ -9,7 +9,45 @@ v-for="(index,val) in array" track-by="id"
 v-for="(val,index) in array" :key="index"
 ```
 
-* 和arr.forEach()内部参数位置一致；
+* 和`Array.forEach()`内部参数位置一致；
+
+
+
+## 遍历
+
+* 遍历标签或组件：**添加自定义属性，需要前面加：**
+
+```html
+<div class="item" v-for="(val,key) in obj_1" :_key=key>
+    每个标签上有自定义属性 _key={{key}}
+</div>
+
+<cpt v-for="(val,key) in obj_1" :_key=key></cpt>
+```
+
+```js
+// ---------------------------------------遍历的组件
+// 被遍历的组件，作为标签使用，自定义属性会加在根标签上；
+var cpt = {
+  template: `<div class="item">遍历的组件</div>`,
+};
+```
+
+* 被添加后的效果：
+
+![1575626214924](imgs/1575626214924.png)
+
+* 若遍历的标签或组件，**给v-指令添加值，前面不需要加：**
+
+```html
+<div class="item" v-for="(val,key) in obj_1" v-html=key></div>
+```
+
+![1575626410666](imgs/1575626410666.png)
+
+* 使用：**不是v-指令，就加：**
+  * 如果遇见的v-指令，不需要加：
+  * 如果遇见的自定义属性，需要加：
 
 
 
@@ -73,7 +111,9 @@ new Vue({
 
 - 组员自己测试组件时，vue2.0的使用方式；
 
-
+* 注意：
+  * `vue1.0 (new A()).$mount("body");`可以绑定在body上进行；
+  * `vue2.0 [Vue warn]: Do not mount Vue to < html > or < body > - mount to normal elements instead.`不能加body或HTML上；
 
 
 
@@ -216,9 +256,9 @@ var router_box = {
         <h6>&nbsp;</h6>
         <h3>路由选项</h3>
         <div class="item">
-          <router-link to='/nav_1'>nav_1</router-link>
-          <router-link to='/nav_2'>nav_2</router-link>
-          <router-link to='/nav_more'>nav_more</router-link>
+          
+          <router-link v-for="ele in nav" :to=ele.path>{{ele.name}}</router-link>
+
         </div>
       </div>
 
@@ -247,6 +287,10 @@ var router_box = {
   }
 };
 ```
+
+* `<router-link v-for="ele in nav" to=ele.path>{{ele.name}}</router-link>` to前面没有：不能绑定；
+
+
 
 * 2.准备路由组件：路由组件内部参数还可以继续使用；
 

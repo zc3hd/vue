@@ -8,6 +8,8 @@ app.use(express.static(path.join(__dirname, '../webapp/')));
 
 // 端口
 app.post('/api/js_demo/font.do', function(req, res) {
+  // console.log(req);
+
   var size = Math.floor(Math.random() * 200);
   if (size < 60) {
     size = 60;

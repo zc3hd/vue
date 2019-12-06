@@ -11,7 +11,7 @@
 
   <div class="app" id="app" v-cloak>
 
-
+    <!-- ---------------------------------------------------v-for -->
     <div class="box">
       <h1>v-for</h1>
 
@@ -31,9 +31,17 @@
 
     <!-- ---------------------------------------------------自定义组件 -->
     <div class="box">
-      <h1>component</h1>
+      <h1>component：基本使用</h1>
       <cpt_1></cpt_1>
       <cpt_2></cpt_2>
+    </div>
+
+    <!-- ---------------------------------------------------绑定测试 -->
+    <div class="box">
+      <h1>component：测试使用</h1>
+      <div class="item">
+        Vue render：<span id="one"></span>
+      </div>
     </div>
 
     <!-- ---------------------------------------------------通信组件 -->
@@ -49,27 +57,44 @@
       </div>
     </div>
 
-
-    <!-- -----------------------------------------------vue-router@2.0.1 -->
-
+    <!-- ---------------------------------------------------axios@0.19.0 -->
     <div class="box">
-      <h1>vue-router@2.0.1：路由数据在视图</h1>
+      <h1>axios@0.19.0</h1>
+
 
       <h6>&nbsp;</h6>
-      <h3>路由选项</h3>
       <div class="item">
-        <router-link to='/nav_1'>nav_1</router-link>
-        <router-link to='/nav_2'>nav_2</router-link>
-        <router-link to='/nav_more'>nav_more</router-link>
+        <button @click=_get()>get</button>
       </div>
+      <div class="item">
+        GET请求数据:{{ajax.get}}
+      </div>
+
+
+      <h6>&nbsp;</h6>
+      <div class="item">
+        <button @click=_post()>post</button>
+      </div>
+      <div class="item">
+        POST请求数据:{{ajax.post}}
+      </div>
+
     </div>
 
-    <div class="box">
-      <h3>具体路由展示</h3>
-      <div class="item">
-        <router-view></router-view>
-      </div>
+
+
+
+
+
+
+
+
+
+    <!-- -----------------------------------------------vue-router@2.0.1 -->
+    <div id="router_box">
+
     </div>
+
 
 
 
@@ -80,6 +105,8 @@
 <script src="../script/lib/vue/vue2.js" type="text/javascript"></script>
 <!-- vue-router@2.0.1 -->
 <script src="../script/lib/vue/vue-router2.0/dist/vue-router.min.js" type="text/javascript"></script>
+<!-- axios@0.19.0 -->
+<script src="../script/lib/vue/axios/dist/axios.js" type="text/javascript"></script>
 <!-- main -->
 <script src="./index.js" type="text/javascript"></script>
 

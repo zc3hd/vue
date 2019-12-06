@@ -13,7 +13,7 @@ v-for="(val,index) in array" :key="index"
 
 
 
-## component
+## component：基本使用
 
 * 组件：{}
 * 模板：必须有根节点；
@@ -31,6 +31,51 @@ components:{
   'cpt_2':cpt_1
 }
 ```
+
+
+
+## component：测试组件
+
+- 为什么会有这个方法：因为vue2.0 的自定义组件变为对象。
+- vue1.0：绑定测试组件
+
+```js
+var A = Vue.extend({
+  template: `<span>我是Vue.extend继承的类，被实例化的组件</span>`,
+});
+
+// A：类
+(new A()).$mount("#one");
+```
+
+- vue2.0：绑定测试组件;
+
+```html
+<div class="box">
+    <h1>component：测试使用</h1>
+    <div class="item">
+        Vue render：<span id="one"></span>
+    </div>
+</div>
+```
+
+```js
+// ----------------------------------------component：测试使用
+var one = {
+  template: `<span id="one">自定义组件，通过render方法被绑定测试</span>`,
+};
+new Vue({
+  el: "#one",
+  render: h => h(one),
+})
+// 被指定的dom 完全被替换；
+```
+
+- 组员自己测试组件时，vue2.0的使用方式；
+
+
+
+
 
 
 
@@ -107,9 +152,60 @@ var bro_2 = {
 
 
 
+## axios
+
+- github:https://github.com/axios/axios
+- 基本用法：
+
+```js
+// ---------------------------------------------axios
+// 这样的方式还是参考与vue 1.0 的方式，挂载到原型对象上，每个实例都可以使用；
+Vue.prototype.$http = axios;
+
+var methods = {
+    _get: function() {
+        this.$http.get('./test_data.js', {
+            params: {
+                id: 12345
+            }
+        })
+        // 
+            .then(function(res) {
+            // console.log(res.data);
+            this.ajax.get = res.data;
+        }.bind(this))
+            .catch(function(error) {
+            console.log(error, 1);
+        });
+    },
+    _post: function() {
+        this.$http
+            .post('/api/js_demo/font.do', {
+            firstName: 'Fred',
+            lastName: 'Flintstone'
+        })
+            .then(function(res) {
+            this.ajax.post = JSON.stringify(res.data);
+        }.bind(this))
+            .catch(function(error) {
+            console.log(error, 1);
+        });
+    },
+}
+```
+
+
+
+
+
+
+
 
 
 ## vue-router@2.0.1
+
+* 和vue-router@1.x.x一样，有三种写代码的方式，可以参加demo_005
+* 最后我们确认选择第三种方式配置我们的路由：**路由数据在组件内，在组件模板内遍历；**
 
 ```
 【视图在HTML】
@@ -176,33 +272,7 @@ router.push({path:'home'});
 router.replace({path:'news'})
 ```
 
-## 绑定组件
 
-- 这个是vue1.0没有的。
 
-```
-new Vue({
-  el:'#app',
-  render:h=>h(some_cpt), 
-});
-```
 
-## axios
 
-- 说是用最新的ajax写的，可以用get的方式访问类似跨域的东西
-
-```
-axios
-  .get('https://api.github.com/users/itstrive')
-  .then(function(res){
-    this.myMessage=res.data;
-  }.bind(this))
-  .catch(function(err){
-      console.log(err);
-  })
-```
-
-------
-
-- 到这vue2.0的变化就基本就说完了，其实也可以按照demo_005_nav的方式写个类型的小测试项目，也就是router的用法不同。就不写了。
-- 但是还是会像demo_005_nav那样，dev组件后需要手动进行写入router.conf.js内部。

@@ -56,7 +56,7 @@ animate: function() {
 
 
 
-## component
+## component：基本使用
 
 * 什么是component？【DOM树】+【数据】+【vue实例（指令）】
 
@@ -121,7 +121,7 @@ var new_span = Vue.extend({
 
 
 
-## Vue.extend
+## component：测试使用
 
 * Vue.extend这个函数是谁的函数？是函数原型对象上的方法，用于拓展类！
 * OK，那么 `var new_span = Vue.extend()`是什么玩意？【**类！！**】

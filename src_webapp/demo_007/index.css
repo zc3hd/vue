@@ -52,14 +52,14 @@ button {
   padding: 16px;
   overflow: auto;
 }
-.app > .box {
+.app .box {
   margin: 0 10px;
   margin-bottom: 5px;
   border-radius: 10px;
   background-color: #ccc;
   padding: 8px 20px;
 }
-.app > .box > .item {
+.app .box .item {
   font-size: 20px;
   line-height: 30px;
   font-weight: 600;

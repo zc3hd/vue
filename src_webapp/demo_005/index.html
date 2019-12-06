@@ -11,10 +11,11 @@
 </head>
 
 <body>
+  <!-- ----------------------------------路由数据在视图HTML -->
   <div class="app" id="app" v-cloak>
 
     <div class="box">
-      <h1>router：路由数据在视图</h1>
+      <h1>router：路由数据在视图HTML</h1>
 
       <h6>&nbsp;</h6>
       <h3>路由选项</h3>
@@ -35,7 +36,34 @@
   </div>
 
 
+
+  <!-- ------------------------------------------------ -->
   <div class="app" id="bpp" v-cloak>
+
+    <div class="box">
+      <h1>router：路由数据在组件内，在HTML中遍历</h1>
+
+      <h6>&nbsp;</h6>
+      <h3>路由选项</h3>
+      <div class="item">
+        <a href="#" v-for="ele in nav" v-link="{path: ele.path}">{{ele.name}}</a>
+      </div>
+    </div>
+
+    <div class="box">
+      <h3>具体路由展示</h3>
+      <div class="item">
+        <router-view></router-view>
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+  <!-- ----------------------------路由数据在组件内，在组件模板中遍历 -->
+  <div class="app" id="cpp" v-cloak>
 
   </div>
 

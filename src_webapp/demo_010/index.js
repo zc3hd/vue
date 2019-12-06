@@ -120,9 +120,10 @@ var router = new VueRouter({
 
 new Vue({
   el: '#app',
-  router: router,
   // 这个是把 #app 这个容器DOM 完全替换为-->view_cpt
   render: h => h(view_cpt),
+  router: router,
+
 
   // 这个就是在作为组件在内部使用
   // components:{

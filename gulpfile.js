@@ -1,5 +1,5 @@
 'use strict';
-var one = './src_webapp/demo_006/nav/';
+var one = './src_webapp/demo_005/';
 
 
 

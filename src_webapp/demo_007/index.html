@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>vue</title>
+  <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+
+  <div class="app" id="app" v-cloak>
+
+
+    <div class="box">
+      <h1>v-for</h1>
+
+      <h6>&nbsp;</h6>
+      <h3>对象</h3>
+      <div class="item" v-for="(val,key) in obj">
+        key:{{key}} ---> val:{{val}}
+      </div>
+
+      <h6>&nbsp;</h6>
+      <h3>数组</h3>
+      <div class="item" v-for="(item,index) in arr" :key=index>
+        index:{{index}} ---> item:{{item}}
+      </div>
+
+    </div>
+
+    <!-- ---------------------------------------------------自定义组件 -->
+    <div class="box">
+      <h1>component</h1>
+      <cpt_1></cpt_1>
+      <cpt_2></cpt_2>
+    </div>
+
+    <!-- ---------------------------------------------------通信组件 -->
+    <div class="box">
+      <h1>通信</h1>
+      <div class="item">
+        组件1：
+        <bro_1></bro_1>
+      </div>
+      <div class="item">
+        组件2：
+        <bro_2></bro_2>
+      </div>
+    </div>
+
+
+    <!-- -----------------------------------------------vue-router@2.0.1 -->
+
+    <div class="box">
+      <h1>vue-router@2.0.1：路由数据在视图</h1>
+
+      <h6>&nbsp;</h6>
+      <h3>路由选项</h3>
+      <div class="item">
+        <router-link to='/nav_1'>nav_1</router-link>
+        <router-link to='/nav_2'>nav_2</router-link>
+        <router-link to='/nav_more'>nav_more</router-link>
+      </div>
+    </div>
+
+    <div class="box">
+      <h3>具体路由展示</h3>
+      <div class="item">
+        <router-view></router-view>
+      </div>
+    </div>
+
+
+
+
+  </div>
+</body>
+<!-- vue -->
+<script src="../script/lib/vue/vue2.js" type="text/javascript"></script>
+<!-- vue-router@2.0.1 -->
+<script src="../script/lib/vue/vue-router2.0/dist/vue-router.min.js" type="text/javascript"></script>
+<!-- main -->
+<script src="./index.js" type="text/javascript"></script>
+
+</html>

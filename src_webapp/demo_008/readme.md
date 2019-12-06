@@ -200,35 +200,26 @@ var routes = [
 
 ## A 组件
 
-* 问题：**直接本地测试，组件内不能出现$route属性；**
+### 初始化
 
-* A目录：
+* 文件夹 A：
   * index.css
   * index.html
   * index.js
-* index.html：只引入vue.min.js文件，因为只是测试组件；
+* index.html：
+  * 引入vue.min.js文件，因为要测试组件，先得有组件；
+  * 引入vue-router.min.js文件；
 
 ```html
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <title>Vue2.0 step_02 A</title>
-  <link rel="stylesheet" href="./index.css">
-</head>
-
 <body>
-    
-  <div id="box"></div>
-    
+  <div class="box"></div>
 </body>
-<!-- vue -->
-<script src="../../script/lib/vue/vue2.js" type="text/javascript"></script>
-<!-- main -->
-<script src="./index.js" type="text/javascript"></script>
 
-</html>
+
+<!-- vue2.0 -->
+<script src="../../script/lib/vue/vue2.js" type="text/javascript"></script>
+<!-- vue-router@2.0.1 -->
+<script src="../../script/lib/vue/vue-router2.0/dist/vue-router.min.js" type="text/javascript"></script>
 ```
 
 * index.css：与组员的约定：组件尽量用一个根标签，类名内也是只写根标签嵌套的样式，不要写样式清除；
@@ -243,32 +234,61 @@ var routes = [
 }
 ```
 
-* index.js：**组件测试**
+### index.js：
 
 ```js
-// 
 var A = {
   template: `
     <div class="A">
       <h4> A的内容 新的内容</h4>
-      <h4>$route.params.id：{{}}</h4> 
-      <h4>$route.path：{{}}</h4> 
-      <h4>$route.query {{}}</h4>
+      <h4>$route.params.id：{{$route.params.id}}</h4> 
+      <h4>$route.path：{{$route.path}}</h4> 
+      <h4>$route.query： {{$route.query}}</h4>
     </div>
    `,
 };
 
-// ------需要在提交前被注释；
-// 本地测试
+
+// **********************************************需要在提交前被注释；
+
+// ------------------------------------组件内：路由无关，单独的组件；
+// 问题：直接本地测试，组件内不能出现$route属性；
 // new Vue({
-//   el: '#box',
+//   el: '.box',
 //   render: h => h(A),
 // });
+
+
+// ------------------------------------组件内：路由相关，参数从地址栏进行配置；
+// 设置 根路径/ 关联 测试组件，设置默认指向；
+var router = new VueRouter({
+  routes: [
+    // ------关联
+    {
+      path: '/:id',
+      component: A,
+    },
+    // ------默认指向
+    { path: '/', redirect: '/test' },
+  ],
+});
+
+// 设置 路由视图组件
+var App = { template: `<router-view></router-view>` };
+
+
+// 开启 路由
+new Vue({
+  el: '.box',
+  render: h => h(App),
+  router: router,
+});
 ```
 
-* 合并测试：
-  * 1.注释JS内的测试注释；
-  * 2.把css 文件和 JS引入相应的位置。若改名字，需要到router.conf.js 配置进行修改；
+### 合并到nav
+
+* **1.组件的index.js内的测试代码一定要注释掉；**
+* **2.把css 文件和 JS引入相应的位置。若改名字，需要到router.conf.js 配置进行修改；**
 
 ```html
 <!DOCTYPE html>

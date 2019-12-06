@@ -22,7 +22,6 @@ var A = Vue.extend({
 
 // ------------------------------------组件内：路由相关，参数从地址栏进行配置；
 var router_test = new VueRouter();
-
 // 设置根路径/ 关联 测试组件
 router_test.map({
   '/:id': { component: A },

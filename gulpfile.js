@@ -1,9 +1,9 @@
 'use strict';
 // var one = './src_webapp/demo_004/';
 // var one = './src_webapp/demo_005/';
-var one = './src_webapp/demo_006/A/';
+// var one = './src_webapp/demo_006/A/';
 // var one = './src_webapp/demo_007/';
-// var one = './src_webapp/demo_008/A/';
+var one = './src_webapp/demo_008/A/';
 
 
 

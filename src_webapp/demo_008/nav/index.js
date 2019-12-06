@@ -53,7 +53,6 @@ new Vue({
   // 绑定组件
   el: '#app',
   render: h => h(App),
-
   // 设置路由
   router: router,
 });

@@ -12,6 +12,8 @@
   * 每个组件下有自己的CSS，JS，HTML；
   * HTML只是针对自己组件的测试，真实不需要；
 
+
+
 ## nav 组件
 
 * nav目录：
@@ -102,14 +104,6 @@ var B = Vue.extend({
     <h4>$route.path：{{$route.path}}</h4> 
     <h4>$route.query：{{$route.query.name}}</h4>
    `
-});
-var C = Vue.extend({
-  template: `
-    <h4> C的内容 </h4>
-    <h4>$route.params.id：{{$route.params.id}}</h4> 
-    <h4>$route.path：{{$route.path}}</h4> 
-    <h4>$route.query：{{$route.query.name}}</h4>
-    `,
 });
 ```
 

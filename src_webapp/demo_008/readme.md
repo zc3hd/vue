@@ -1,8 +1,8 @@
-# Vue2.0 step_02
+# Vue2.0 step_03
 
-## 实际开发
+## vue-router v2.0.1
 
-* vue2.0没有cli的开发；
+* vue2.0 没有cli的 开发；
 * 需求：
   * A同学，负责A组件，自己测试；
   * B同学，负责B组件和nav组件，自己测试；
@@ -234,6 +234,8 @@ var routes = [
 }
 ```
 
+
+
 ### index.js：
 
 ```js
@@ -284,6 +286,8 @@ new Vue({
   router: router,
 });
 ```
+
+
 
 ### 合并到nav
 

@@ -155,10 +155,10 @@ var router_box = {
   template: `
     <div id="router_box">
       <div class="box">
-        <h1>router：路由数据在组件内，在组件模板内遍历</h1>
+        <h1>router@3.0.1：路由数据在组件内，在组件模板内遍历</h1>
 
         <h6>&nbsp;</h6>
-        <h3>路由选项</h3>
+        <h3>异步获取路由选项</h3>
         <div class="item">
           <router-link v-for="ele in nav" :to=ele.path>{{ele.name}}</router-link>
         </div>
@@ -194,11 +194,16 @@ var router_box = {
 var nav_1 = {
   template: `
     <div>
-      <h4>nav_1的内容</h4>
+      <h3>nav_1的内容</h3>
+      
+      <h4>&nbsp;</h4>
+      <h4>$route的属性:</h4>
       <h4>$route.params.id：{{$route.params.id}}</h4> 
       <h4>$route.path：{{$route.path}}</h4> 
       <h4>$route.query：{{$route.query.name}}</h4>
 
+      <h4>&nbsp;</h4>
+      <h4>router的方法:</h4>
       <button @click=go(1)>go(1) 下一路由</button>
       <button @click=go(-1)>go(-1) 上一路由</button>
       <button @click=push()>push 历史记录且转跳到/nav_2路由</button>
@@ -235,6 +240,25 @@ var nav_more = {
       <h4>$route.path：{{$route.path}}</h4> 
       <h4>$route.query：{{$route.query.name}}</h4>
     </div>`,
+  updated: function() {
+    console.log(this);
+  },
+  // beforeRouteEnter(to, from, next) {
+  //   进入该路由之前
+  //   console.log(to, from);
+  //   next();
+  // },
+  //
+  // beforeRouteUpdate(to, from, next) {
+  //   路由更新前
+  //   console.log(this, 1);
+  //   next();
+  // },
+  // beforeRouteLeave(to, from, next) {
+  //   路由离开前;
+  //   console.log(to, from);
+  //   next();
+  // }
 };
 
 // -----------------配置：path-->组件 关联、默认指向
@@ -260,11 +284,20 @@ var routes = [
   { path: '/nav_more', redirect: '/nav_more/1' }
 ];
 
-// 
+// 路由对象
 var router = new VueRouter({
   routes: routes,
 });
 
+
+// -------------------------------------导航钩子
+// router.beforeEach(function(to, from, next) {
+//   alert("路由每次变化--前")
+//   next();
+// });
+// router.afterEach(function(to, from) {
+//   alert("路由每次变化--后")
+// });
 
 
 // 开启路由

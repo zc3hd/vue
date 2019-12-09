@@ -192,7 +192,7 @@ var bro_2 = {
 
 
 
-## axios
+## axios@0.19.0
 
 - github:https://github.com/axios/axios
 - 基本用法：
@@ -238,12 +238,15 @@ var methods = {
 
 
 
-## vue-router@2.0.1
+## vue-router@3.0.1
 
 * 需知：
   * 和vue-router@1.x.x一样，有三种写代码的方式，可以参考demo_005
-  * 最后我们确认选择第三种方式配置我们的路由：**路由数据在组件内，在组件模板内遍历；**
-* 1.准备路由视图组件：路由数据异步获取，设置 名字-->link
+  * 我们确认选择第三种方式，配置路由：**路由数据在组件内，在组件模板内遍历；**
+
+### 路由视图组件
+
+* 路由数据异步获取，设置 名字-->link
 
 ```js
 // --------------------路由视图组件
@@ -292,7 +295,9 @@ var router_box = {
 
 
 
-* 2.准备路由组件：路由组件内部参数还可以继续使用；
+### 准备路由组件
+
+* 路由组件内部参数还可以继续使用；
 
 ```js
 // --------------------路由组件
@@ -325,7 +330,7 @@ var nav_more = {
 };
 ```
 
-* 3.设置 关联：link--->cpt、设置默认指向；
+### 关联：link--->cpt及默认指向
 
 ```js
 // -----------------配置：path-->组件 关联、默认指向
@@ -356,7 +361,7 @@ var router = new VueRouter({
 });
 ```
 
-* 4.开启路由：
+### 开启路由
 
 ```js
 // 开启路由
@@ -370,7 +375,9 @@ new Vue({
 });
 ```
 
-- 其他：router配置到组件后，**路由组件**内的属性；
+### this.$router/this.$route
+
+- router配置到组件后，**路由组件**内的属性；
   - `this.$route`：对象
   - `this.$router`：对象（方法）；
     - go
@@ -407,6 +414,73 @@ var nav_1 = {
       this.$router.replace({ path: "/nav_2" });
     }
   },
+};
+```
+
+### 导航钩子
+
+* **作用：可以监听路由切换**
+* 全局钩子函数：
+  * 注意：`next: Function`，这是一个必须需要调用的方法，而具体的执行效果则依赖 next 方法调用的参数；不调用就会卡到这个函数不会执行，组件没有效果；
+
+```js
+// router.beforeEach(function(to, from, next) {
+//   alert("路由每次变化--前")
+//   next();
+// });
+// router.afterEach(function(to, from) {
+//   alert("路由每次变化--后")
+// });
+```
+
+* 配置路由时，配置钩子函数：(了解)
+
+```js
+cont router = new VueRouter({
+    routes: [
+        {
+            path: '/file',
+            component: File,
+            beforeEnter: (to, from ,next) => {
+                next();
+            }
+        }
+    ]
+});
+```
+
+* 路由组件内的导航钩子：
+  * `updated`：监听只要是组件内所有的属性（包括路由参数）发生变化时，调用该函数；
+  * 路由钩子函数主要用于**监听路由的切换**
+
+```js
+var nav_more = {
+  template: `
+    <div>
+      <h4>nav_more的内容</h4>
+      <h4>$route.params.id：{{$route.params.id}}</h4> 
+      <h4>$route.path：{{$route.path}}</h4> 
+      <h4>$route.query：{{$route.query.name}}</h4>
+    </div>`,
+  updated: function() {
+    console.log(this);
+  },
+  // beforeRouteEnter(to, from, next) {
+  //   进入该路由之前
+  //   console.log(to, from);
+  //   next();
+  // },
+  //
+  // beforeRouteUpdate(to, from, next) {
+  //   路由更新前
+  //   console.log(this, 1);
+  //   next();
+  // },
+  // beforeRouteLeave(to, from, next) {
+  //   路由离开前;
+  //   console.log(to, from);
+  //   next();
+  // }
 };
 ```
 

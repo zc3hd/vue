@@ -187,7 +187,7 @@ axios.interceptors.response
 
 
 // ------------------------------------------------------vuex
-console.log(Vuex);
+
 
 
 // ---------------------------------------------入口组件
@@ -226,6 +226,13 @@ var vm = new Vue({
       post: "",
     },
 
+
+    // ----------------------------------element-UI
+    visible: false,
+    time_val: "",
+    rate_val: "",
+    color_picker: "#409EFF",
+    switch_val: true,
 
   },
   components: {

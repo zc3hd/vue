@@ -1,4 +1,4 @@
-# Vue2.0 step_03
+# Vue2.0
 
 ## vue-router v2.0.1
 

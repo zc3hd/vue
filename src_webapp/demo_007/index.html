@@ -4,6 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <title>vue</title>
+  <!-- element-ui -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <!-- vant -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@2.2/lib/index.css">
   <link rel="stylesheet" href="./index.css">
 </head>
 
@@ -150,7 +154,46 @@
 
 
 
+    <!-- -------------------------------------------element-UI -->
+    <h1>element-UI</h1>
+    <el-button @click="visible = true">Button</el-button>
+    <el-dialog :visible.sync=visible title="Hello world">
+      <p>Try Element</p>
+    </el-dialog>
+
+
+    <div class="block">
+      <span class="demonstration">默认</span>
+      <el-date-picker v-model="time_val" type="date" placeholder="选择日期">
+      </el-date-picker>
+    </div>
+
+
+    <div class="block">
+      <span class="demonstration">默认不区分颜色</span>
+      <el-rate v-model="rate_val"></el-rate>
+    </div>
+
+    <div class="block">
+      <span class="demonstration">有默认值</span>
+      <el-color-picker v-model="color_picker"></el-color-picker>
+    </div>
+
+
+    <el-switch v-model="switch_val" active-color="#13ce66" inactive-color="#ff4949">
+    </el-switch>
+
+
+
+    <!-- --------------------------------------------------vant -->
+    <van-button loading type="primary" />
+
   </div>
+
+
+
+
+
 </body>
 <!-- vue -->
 <script src="../script/lib/vue/vue@2.6.10.min.js" type="text/javascript"></script>
@@ -160,9 +203,15 @@
 <script src="../script/lib/vue/axios/dist/axios.js" type="text/javascript"></script>
 <!-- vuex -->
 <script src="../script/lib/vue/vuex@2.0.0.min.js" type="text/javascript"></script>
+<!-- element-ui -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<!-- vant -->
+<script src="https://cdn.jsdelivr.net/npm/vant@2.2/lib/vant.min.js"></script>
 
 <!-- index -->
 <script src="./index.js" type="text/javascript"></script>
+
+
 
 <!-- 路由配置index.router 的学习 -->
 <script src="./index.router.js" type="text/javascript"></script>

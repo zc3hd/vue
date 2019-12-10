@@ -1,4 +1,4 @@
-# Vue@2.6.10 step_01
+# Vue@2.6.10
 
 ## 组件：v-for
 ```js
@@ -1016,4 +1016,59 @@ new Vue({
 ```
 
 
+
+## Element-ui
+
+* 引入
+
+```html
+<!-- 引入样式 -->
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+```
+
+* 使用
+
+```html
+<h1>element-UI</h1>
+<el-button @click="visible = true">Button</el-button>
+<el-dialog :visible.sync=visible title="Hello world">
+    <p>Try Element</p>
+</el-dialog>
+
+
+<div class="block">
+    <span class="demonstration">默认</span>
+    <el-date-picker v-model="time_val" type="date" placeholder="选择日期">
+    </el-date-picker>
+</div>
+
+
+<div class="block">
+    <span class="demonstration">默认不区分颜色</span>
+    <el-rate v-model="rate_val"></el-rate>
+</div>
+
+<div class="block">
+    <span class="demonstration">有默认值</span>
+    <el-color-picker v-model="color_picker"></el-color-picker>
+</div>
+
+
+<el-switch v-model="switch_val" active-color="#13ce66" inactive-color="#ff4949">
+</el-switch>
+```
+
+
+
+## Vant
+
+* 引入
+
+```html
+<!-- 引入样式文件 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@2.2/lib/index.css">
+<script src="https://cdn.jsdelivr.net/npm/vant@2.2/lib/vant.min.js"></script>
+```
 

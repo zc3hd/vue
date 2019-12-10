@@ -6,7 +6,7 @@ var cpt = {
 
 
 
-// ---------------------------------------自定义组件
+// ---------------------------------------定义组件
 var cpt_1 = {
   template: `<div class="item">全局 自定义组件</div>`,
 };
@@ -19,14 +19,104 @@ var cpt_2 = {
 };
 
 
-// ----------------------------------------component：测试使用
+// ----------------------------------------绑定组件
 var one = {
   template: `<span id="one">自定义组件，通过render方法被绑定测试</span>`,
 };
 new Vue({
   el: "#one",
   render: h => h(one),
-})
+});
+
+
+
+// ----------------------------------------table 缓存组件
+var tab_1 = {
+  name: "tab_1",
+  template: `<div class="item">
+    <div>tab_1</div>
+    <div>num：{{num}}</div>
+    <button @click=add()>num++</button>
+  </div>`,
+  data: function() {
+    return {
+      num: 0,
+    }
+  },
+  methods: {
+    add: function() {
+      this.num++;
+    },
+  }
+};
+var tab_2 = {
+  name: "tab_2",
+  template: `<div class="item">
+    <div>tab_2</div>
+    <div>num：{{num}}</div>
+    <button @click=add()>num++</button>
+  </div>`,
+  data: function() {
+    return {
+      num: 0,
+    }
+  },
+  methods: {
+    add: function() {
+      this.num++;
+    },
+  }
+};
+
+
+// ----------------------------------------组件 自定义属性和事件
+var cpt_prop = {
+  name: "cpt_prop",
+  template: `
+  <div class="item">
+    <div>{{prop_a}}</div>
+    <div>{{prop_b}}</div>
+    <div>{{prop_c}}</div>
+    <div>{{prop_e}}</div>
+    <div>prop_f:{{prop_f}}</div>
+  </div>`,
+  props: {
+    // 基础的类型检查 (`null` 和 `undefined` 会通过任何类型验证)
+    prop_a: {
+      type: String,
+      default: "100"
+    },
+    // 多个可能的类型
+    prop_b: [String, Number],
+    // 必填的字符串
+    prop_c: {
+      type: String,
+      required: true
+    },
+    // 带有默认值的对象
+    prop_e: {
+      type: Object,
+      // 对象或数组默认值必须从一个工厂函数获取
+      default: function() {
+        return { message: 'hello' }
+      }
+    },
+    // 自定义验证函数
+    prop_f: {
+      validator: function(value) {
+        // 这个值必须匹配下列字符串中的一个 当 prop 验证失败的时候，(开发环境构建版本的) Vue 将会产生一个控制台的警告。
+        return ['success', 'warning', 'danger'].indexOf(value) !== -1
+      }
+    }
+  },
+  mounted: function() {
+    // 注册并响应
+    this.$emit('cpt_ev', this.prop_a);
+  }
+};
+
+
+
 
 
 // ----------------------------------------通信组件
@@ -63,8 +153,42 @@ var bro_2 = {
   },
 };
 
+
+
+
+
 // ---------------------------------------------axios
 Vue.prototype.$http = axios;
+
+
+// 拦截器
+axios.interceptors.request
+  .use(function(request) {
+    // 发送请求时的执行函数
+    console.log(request);
+
+    // 没有返回就拦截了；
+    return request;
+  }, function(error) {
+    return Promise.reject(error);
+  });
+
+
+axios.interceptors.response
+  .use(function(response) {
+    // 收到响应时的执行函数；
+    console.log(response);
+
+    return response;
+  }, function(error) {
+    return Promise.reject(error);
+  });
+
+
+
+// ------------------------------------------------------vuex
+console.log(Vuex);
+
 
 // ---------------------------------------------入口组件
 var vm = new Vue({
@@ -87,11 +211,22 @@ var vm = new Vue({
     },
 
 
-    // -----------异步
+    // -----------------------------watch:
+    a: "old",
+
+
+
+    // ------------------------------table
+    tab_name: "tab_1",
+
+
+    // -----------axios异步
     ajax: {
       get: "",
       post: "",
     },
+
+
   },
   components: {
     // 局部组件
@@ -101,6 +236,15 @@ var vm = new Vue({
     // 通信的兄弟组件
     "bro_1": bro_1,
     "bro_2": bro_2,
+
+
+    // tab组件
+    'tab_1': tab_1,
+    'tab_2': tab_2,
+
+
+    // 组件的属性
+    "cpt_prop": cpt_prop,
   },
   // 方法
   methods: {
@@ -132,180 +276,42 @@ var vm = new Vue({
           console.log(error, 1);
         });
     },
+    tab: function(info) {
+      this.tab_name = `tab_${info}`;
+    },
+    _do: function(info) {
+      // alert(info)
+    }
   },
+  // -----------------------------watch:
+  watch: {
+    // 指定监听
+    a: function(_new, _old) {
+      // console.log(_new, _old);
+    },
+    'ajax.get': function(_new, _old) {
+      // console.log(_new, _old);
+    },
+    // 该回调会在任何被侦听的对象的 property 改变时被调用，不论其被嵌套多深
+    ajax: {
+      // 处理函数
+      handler: function(_new, _old) {
+        // console.log(_new, _old);
+      },
+      deep: true
+    },
+  },
+  // ------------------------------------------------声明周期
   beforeCreate: function() {},
   created: function() {},
   beforeMount: function() {},
-  mounted: function() {},
+  mounted: function() {
+    setTimeout(() => {
+      this.a = "new";
+    }, 1000);
+  },
   beforeUpdate: function() {},
   updated: function() {},
   beforeDestroy: function() {},
   destroyed: function() {}
-});
-
-
-
-
-
-
-
-// ------------------------------------------------路由
-// --------------------路由视图组件
-var router_box = {
-  template: `
-    <div id="router_box">
-      <div class="box">
-        <h1>router@3.0.1：路由数据在组件内，在组件模板内遍历</h1>
-
-        <h6>&nbsp;</h6>
-        <h3>异步获取路由选项</h3>
-        <div class="item">
-          <router-link v-for="ele in nav" :to=ele.path>{{ele.name}}</router-link>
-        </div>
-      </div>
-
-      <div class="box">
-        <h3>具体路由展示</h3>
-        <div class="item">
-          <router-view></router-view>
-        </div>
-      </div>
-    </div>
-  `,
-  data: function() {
-    return {
-      nav: null
-    }
-  },
-  mounted: function() {
-    setTimeout(() => {
-      // console.log(this);
-      this.nav = [
-        { path: '/nav_1', name: 'nav_1' },
-        { path: '/nav_2', name: 'nav_2' },
-        { path: '/nav_more', name: 'nav_more' },
-      ];
-    }, 1000);
-  }
-};
-
-
-// --------------------路由组件
-var nav_1 = {
-  template: `
-    <div>
-      <h3>nav_1的内容</h3>
-      
-      <h4>&nbsp;</h4>
-      <h4>$route的属性:</h4>
-      <h4>$route.params.id：{{$route.params.id}}</h4> 
-      <h4>$route.path：{{$route.path}}</h4> 
-      <h4>$route.query：{{$route.query.name}}</h4>
-
-      <h4>&nbsp;</h4>
-      <h4>router的方法:</h4>
-      <button @click=go(1)>go(1) 下一路由</button>
-      <button @click=go(-1)>go(-1) 上一路由</button>
-      <button @click=push()>push 历史记录且转跳到/nav_2路由</button>
-      <button @click=replace()>replace 当前历史记录且转跳到/nav_2路由</button>
-    </div>`,
-  methods: {
-    go: function(num) {
-      this.$router.go(num);
-    },
-    // 
-    push: function() {
-      this.$router.push({ path: "/nav_2" });
-    },
-    // 
-    replace: function() {
-      this.$router.replace({ path: "/nav_2" });
-    }
-  },
-};
-var nav_2 = {
-  template: `
-    <div>
-      <h4>nav_2的内容</h4>
-      <h4>$route.params.id：{{$route.params.id}}</h4> 
-      <h4>$route.path：{{$route.path}}</h4> 
-      <h4>$route.query：{{$route.query.name}}</h4>
-    </div>`,
-};
-var nav_more = {
-  template: `
-    <div>
-      <h4>nav_more的内容</h4>
-      <h4>$route.params.id：{{$route.params.id}}</h4> 
-      <h4>$route.path：{{$route.path}}</h4> 
-      <h4>$route.query：{{$route.query.name}}</h4>
-    </div>`,
-  updated: function() {
-    console.log(this);
-  },
-  // beforeRouteEnter(to, from, next) {
-  //   进入该路由之前
-  //   console.log(to, from);
-  //   next();
-  // },
-  //
-  // beforeRouteUpdate(to, from, next) {
-  //   路由更新前
-  //   console.log(this, 1);
-  //   next();
-  // },
-  // beforeRouteLeave(to, from, next) {
-  //   路由离开前;
-  //   console.log(to, from);
-  //   next();
-  // }
-};
-
-// -----------------配置：path-->组件 关联、默认指向
-var routes = [
-  // -----关联
-  {
-    path: '/nav_1',
-    component: nav_1,
-  },
-  // 
-  {
-    path: '/nav_2',
-    component: nav_2,
-  },
-  // 
-  {
-    path: '/nav_more/:id',
-    component: nav_more,
-  },
-  // ------默认指向
-  { path: '/', redirect: '/nav_1' },
-  // 
-  { path: '/nav_more', redirect: '/nav_more/1' }
-];
-
-// 路由对象
-var router = new VueRouter({
-  routes: routes,
-});
-
-
-// -------------------------------------导航钩子
-// router.beforeEach(function(to, from, next) {
-//   alert("路由每次变化--前")
-//   next();
-// });
-// router.afterEach(function(to, from) {
-//   alert("路由每次变化--后")
-// });
-
-
-// 开启路由
-new Vue({
-  // 绑定组件
-  el: '#router_box',
-  render: h => h(router_box),
-
-  // 设置路由
-  router: router,
 });

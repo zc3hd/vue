@@ -121,7 +121,7 @@ var new_span = Vue.extend({
 
 
 
-## component：测试使用
+## component：绑定组件
 
 * Vue.extend这个函数是谁的函数？是函数原型对象上的方法，用于拓展类！
 * OK，那么 `var new_span = Vue.extend()`是什么玩意？【**类！！**】
@@ -208,6 +208,10 @@ var tab_3 = Vue.extend({
 
 
 ## 父子传递
+
+* 本质：
+  * 组件设置属性：赋值；
+  * 组件设置自定义事件，触发；
 
 ### 父级--->子级
 

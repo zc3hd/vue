@@ -36,36 +36,65 @@
       <h1>遍历</h1>
 
       <h6>&nbsp;</h6>
-      <h3>标签或组件</h3>
+      <h3>标签被遍历：</h3>
       <div class="item" v-for="(val,key) in obj_1" :_key=key>
         每个标签上有自定义属性 _key={{key}}
       </div>
-
-      <cpt v-for="(val,key) in obj_1" :_key=key></cpt>
-
       <div class="item" v-for="(val,key) in obj_1" v-html=key></div>
+
+
+      <h6>&nbsp;</h6>
+      <h3>组件被遍历：</h3>
+      <cpt v-for="(val,key) in obj_1" :_key=key></cpt>
 
 
     </div>
 
-    <!-- ---------------------------------------------------自定义组件 -->
+    <!-- ---------------------------------------------------定义组件 -->
     <div class="box">
-      <h1>component：基本使用</h1>
+      <h1>定义组件</h1>
       <cpt_1></cpt_1>
       <cpt_2></cpt_2>
     </div>
 
-    <!-- ---------------------------------------------------绑定测试 -->
+    <!-- ---------------------------------------------------绑定组件 -->
     <div class="box">
-      <h1>component：测试使用</h1>
+      <h1>绑定组件</h1>
       <div class="item">
         Vue render：<span id="one"></span>
       </div>
     </div>
 
+    <!-- ---------------------------------------------------缓存组件 -->
+    <div class="box">
+      <h1>缓存组件</h1>
+
+      <h6>&nbsp;</h6>
+      <h3>组件table栏</h3>
+      <div class="item">
+        <button @click=tab(1)>tab_1</button>
+        <button @click=tab(2)>tab_2</button>
+      </div>
+      <keep-alive include="tab_1">
+        <component :is=tab_name></component>
+      </keep-alive>
+
+    </div>
+
+
+    <!-- ---------------------------------------------------props -->
+    <div class="box">
+      <h1>组件 自定义属性、事件</h1>
+
+      <cpt_prop prop_a="10" prop_b="str_b" prop_c="str_c" prop_f="success" @cpt_ev=_do></cpt_prop>
+    </div>
+
+
+
+
     <!-- ---------------------------------------------------通信组件 -->
     <div class="box">
-      <h1>通信</h1>
+      <h1>通信组件</h1>
       <div class="item">
         组件1：
         <bro_1></bro_1>
@@ -75,6 +104,9 @@
         <bro_2></bro_2>
       </div>
     </div>
+
+
+
 
     <!-- ---------------------------------------------------axios@0.19.0 -->
     <div class="box">
@@ -104,24 +136,40 @@
 
 
 
-    <!-- -----------------------------------------------vue-router@2.0.1 -->
+    <!-- -----------------------------------------------vue-router@3.0.1 -->
     <div id="router_box">
 
     </div>
 
 
 
+    <!-- ----------------------------------------------vuex@2.0.0 -->
+    <div id="vuex_box">
+
+    </div>
+
 
 
   </div>
 </body>
 <!-- vue -->
-<script src="../script/lib/vue/vue2.js" type="text/javascript"></script>
+<script src="../script/lib/vue/vue@2.6.10.min.js" type="text/javascript"></script>
 <!-- vue-router -->
 <script src="../script/lib/vue/vue-router_v3.0.1.js" type="text/javascript"></script>
 <!-- axios@0.19.0 -->
 <script src="../script/lib/vue/axios/dist/axios.js" type="text/javascript"></script>
-<!-- main -->
+<!-- vuex -->
+<script src="../script/lib/vue/vuex@2.0.0.min.js" type="text/javascript"></script>
+
+<!-- index -->
 <script src="./index.js" type="text/javascript"></script>
+
+<!-- 路由配置index.router 的学习 -->
+<script src="./index.router.js" type="text/javascript"></script>
+
+<!-- vuex 的学习 -->
+<script src="./index.vue.store.js" type="text/javascript"></script>
+<script src="./index.vuex.js" type="text/javascript"></script>
+
 
 </html>

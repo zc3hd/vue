@@ -17,7 +17,7 @@ var opts = {
   // 监听哪个目录下的文件；
   src: 'src_webapp',
   // 依赖文件的目录名称，需要复制
-  copy: "scripts",
+  copy: "script",
   // 打包的目录名称
   dist: 'webapp',
 };

@@ -473,6 +473,8 @@ axios.interceptors.response
 
 ## vue-router@3.0.1
 
+
+
 ### 基本使用
 
 * 需知：
@@ -616,8 +618,6 @@ var router = new VueRouter({
 });
 ```
 
-
-
 * 开启路由：
 
 ```js
@@ -673,6 +673,8 @@ var nav_1 = {
   },
 };
 ```
+
+
 
 ### 导航生命周期
 
@@ -749,6 +751,8 @@ var nav_more = {
   - 路由钩子函数主要用于**监听路由的切换**
   - `watch.$route`：只要是用于监听该属性值的变化；与`updated`可代替使用；切换是监听不到的；
 
+
+
 ### keep-alive
 
 * 如果对`<router-view></router-view>`包裹`keep-alive`
@@ -784,6 +788,10 @@ var nav_1 = {
   }
 };
 ```
+
+
+
+
 
 
 
@@ -1071,4 +1079,10 @@ new Vue({
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@2.2/lib/index.css">
 <script src="https://cdn.jsdelivr.net/npm/vant@2.2/lib/vant.min.js"></script>
 ```
+
+
+
+# vue单文件组件
+
+* 单文件组件需要配合webpack：学习[传送门](https://github.com/zc3hd/cli-wpkEpr-spa)
 

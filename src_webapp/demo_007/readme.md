@@ -11,6 +11,8 @@ v-for="(val,index) in array" :key="index"
 
 * 和`Array.forEach()`内部参数位置一致；
 
+* 2.2.0+ 的版本里，当在组件中使用 v-for 时，key 现在是必须的。
+
 
 
 ## 组件：遍历
@@ -473,8 +475,6 @@ axios.interceptors.response
 
 ## vue-router@3.0.1
 
-
-
 ### 基本使用
 
 * 需知：
@@ -631,6 +631,8 @@ new Vue({
   router: router,
 });
 ```
+
+
 
 ### this.$router/this.$route
 
